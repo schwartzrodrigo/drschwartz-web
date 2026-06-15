@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Rodrigo Schwartz · Dermatología Oncológica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" /></noscript>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:       #f0ebe3;
+      --cream-light: #f7f4f0;
+      --cream-dark:  #e6dfd5;
+      --tan:         #b8956a;
+      --tan-light:   #d4b896;
+      --tan-dark:    #7a5c3a;
+      --brown:       #241a11;
+      --brown-mid:   #5c4433;
+      --brown-light: #9a8070;
+      --white:       #faf8f5;
+      --accent:      #b8956a;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--brown);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--tan-light); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+      transition: background 0.5s, padding 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(250,248,245,0.94);
+      backdrop-filter: blur(12px);
+      padding: 18px 48px;
+      border-bottom: 1px solid rgba(184,149,106,0.15);
+    }
+    .nav-logo {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.4s;
+    }
+    nav.scrolled .nav-logo { color: var(--brown); }
+    .nav-logo span { font-weight: 300; opacity: 0.7; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      font-weight: 400;
+      transition: color 0.3s;
+    }
+    nav.scrolled .nav-links a { color: var(--brown-mid); }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--white);
+      color: var(--brown) !important;
+      padding: 10px 24px;
+      border-radius: 100px;
+      font-weight: 500 !important;
+      transition: background 0.3s, transform 0.2s !important;
+    }
+    nav.scrolled .nav-cta { background: var(--tan); color: var(--white) !important; }
+    .nav-cta:hover { background: var(--tan) !important; color: var(--white) !important; transform: scale(1.02); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(36,26,17,0.2) 0%, rgba(36,26,17,0.45) 50%, rgba(36,26,17,0.80) 100%),
+        url('img/hero-bg.jpg') center/cover no-repeat;
+      transform: scale(1.04);
+      transition: transform 8s ease-out;
+    }
+    #hero.loaded .hero-bg { transform: scale(1); }
+    .hero-content {
+      position: relative;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 32px;
+    }
+    .hero-label {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--tan-light);
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.9s 0.3s forwards;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 7vw, 96px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 1s 0.5s forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--tan-light);
+    }
+    .hero-sub {
+      margin-top: 24px;
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(250,248,245,0.75);
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s 0.75s forwards;
+    }
+    .hero-actions {
+      margin-top: 44px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s 1s forwards;
+    }
+    .btn-primary {
+      background: var(--tan);
+      color: var(--white);
+      padding: 14px 36px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--tan-dark); transform: scale(1.02); }
+    .btn-outline {
+      border: 1px solid rgba(250,248,245,0.5);
+      color: var(--white);
+      padding: 14px 36px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 400;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: border-color 0.3s, background 0.3s, transform 0.2s;
+    }
+    .btn-outline:hover {
+      border-color: var(--white);
+      background: rgba(250,248,245,0.12);
+      transform: scale(1.02);
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(250,248,245,0.45);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      animation: fadeUp 1s 1.5s forwards;
+    }
+    .hero-scroll::after {
+      content: '';
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, rgba(184,149,106,0.6), transparent);
+      animation: scrollLine 2s 2s infinite;
+    }
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ── STATS BAR ── */
+    #stats {
+      background: var(--tan);
+      border-top: none;
+      border-bottom: none;
+      padding: 40px 48px;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+    }
+    .stat-item {
+      flex: 1;
+      max-width: 220px;
+      text-align: center;
+      padding: 16px 32px;
+      border-right: 1px solid rgba(255,255,255,0.2);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 54px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat-num sup { font-size: 24px; }
+    .stat-label {
+      margin-top: 8px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(250,248,245,0.75);
+    }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 120px 48px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4.5vw, 62px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--brown);
+      letter-spacing: -0.01em;
+    }
+    .section-title em { font-style: italic; font-weight: 400; color: var(--tan); }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-text p {
+      margin-top: 28px;
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--brown-mid);
+      max-width: 480px;
+    }
+    .about-text p + p { margin-top: 16px; }
+    .about-credentials {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .credential-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 13px;
+      color: var(--brown-light);
+    }
+    .credential-item::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--tan);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+    .about-image {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: sepia(10%) contrast(1.02);
+      transition: transform 6s ease-out;
+    }
+    .about-image:hover img { transform: scale(1.03); }
+    .about-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(184,149,106,0.15) 0%, transparent 50%);
+      z-index: 1;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--cream); }
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--cream-dark);
+    }
+    .service-card {
+      background: var(--white);
+      padding: 48px 40px;
+      transition: background 0.4s;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--tan);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s;
+    }
+    .service-card:hover { background: var(--cream-light); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-num {
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: var(--tan-light);
+      margin-bottom: 28px;
+      letter-spacing: 0.1em;
+    }
+    .service-title {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--brown);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .service-desc {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--brown-mid);
+    }
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--tan);
+      text-decoration: none;
+      transition: gap 0.3s;
+    }
+    .service-link:hover { gap: 14px; }
+
+    /* ── WHY ── */
+    #why { background: var(--cream-dark); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px 80px;
+      margin-top: 60px;
+    }
+    .why-item {
+      padding-top: 24px;
+      border-top: 1px solid rgba(184,149,106,0.25);
+    }
+    .why-num {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--tan);
+      margin-bottom: 16px;
+    }
+    .why-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 12px;
+    }
+    .why-desc {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--brown-mid);
+    }
+
+    /* ── TESTIMONIAL ── */
+    #testimonial {
+      background: var(--tan);
+      padding: 100px 48px;
+      text-align: center;
+    }
+    .quote-mark {
+      font-family: var(--font-display);
+      font-size: 120px;
+      line-height: 0.6;
+      color: var(--white);
+      opacity: 0.4;
+      display: block;
+      margin-bottom: 16px;
+    }
+    .quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      max-width: 760px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+    .quote-author {
+      margin-top: 32px;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(250,248,245,0.7);
+    }
+
+    /* ── AFFILIATIONS ── */
+    #affiliations { background: var(--cream); padding: 80px 48px; }
+    .affiliations-label {
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      margin-bottom: 48px;
+    }
+    .affiliations-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px 24px;
+    }
+    .affiliation-tag {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brown-mid);
+      padding: 10px 20px;
+      border: 1px solid rgba(184,149,106,0.3);
+      border-radius: 100px;
+      transition: border-color 0.3s, color 0.3s, background 0.3s;
+    }
+    .affiliation-tag:hover { border-color: var(--tan); color: var(--tan-dark); background: rgba(184,149,106,0.07); }
+
+    /* ── FAQ ── */
+    #faq { background: var(--white); }
+    .faq-list { margin-top: 60px; }
+    .faq-item {
+      border-bottom: 1px solid rgba(184,149,106,0.18);
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 28px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      text-align: left;
+    }
+    .faq-q-text {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--brown);
+      max-width: 680px;
+    }
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      border: 1px solid rgba(184,149,106,0.35);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-left: 24px;
+      transition: border-color 0.3s, transform 0.4s;
+      color: var(--brown-mid);
+      font-size: 16px;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); border-color: var(--tan); color: var(--tan); }
+    .faq-a {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--brown-mid);
+      max-width: 640px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.4s;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 28px; }
+
+    /* ── CTA SECTION ── */
+    #cta {
+      background: var(--brown);
+      padding: 140px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(184,149,106,0.12) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 72px);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .cta-title em { font-style: italic; color: var(--tan-light); }
+    .cta-sub {
+      font-size: 15px;
+      color: rgba(250,248,245,0.65);
+      max-width: 420px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-gold {
+      background: var(--tan);
+      color: var(--white);
+      padding: 16px 44px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-gold:hover { background: var(--tan-light); transform: scale(1.02); }
+    .contact-details {
+      margin-top: 60px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .contact-item {
+      font-size: 13px;
+      color: rgba(250,248,245,0.55);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .contact-item strong { color: var(--white); font-weight: 400; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--cream-dark);
+      border-top: 1px solid rgba(184,149,106,0.2);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-logo {
+      font-family: var(--font-body);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brown-mid);
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--brown-light);
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      font-size: 12px;
+      color: var(--brown-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--tan); }
+
+    /* ── BTN OUTLINE (light sections) ── */
+    .btn-outline-dark {
+      border: 1px solid rgba(36,26,17,0.25);
+      color: var(--brown);
+      padding: 14px 36px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 400;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: border-color 0.3s, background 0.3s, transform 0.2s;
+    }
+    .btn-outline-dark:hover {
+      border-color: var(--tan);
+      background: rgba(184,149,106,0.08);
+      transform: scale(1.02);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.35s; }
+    .reveal-delay-4 { transition-delay: 0.5s; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: none; }
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .whatsapp-fab {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      z-index: 90;
+      background: #25D366;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.3);
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .whatsapp-fab:hover { transform: scale(1.08); box-shadow: 0 6px 32px rgba(37,211,102,0.45); }
+    .whatsapp-fab svg { width: 26px; height: 26px; fill: white; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      section { padding: 80px 24px; }
+      #stats { padding: 32px 24px; flex-wrap: wrap; gap: 0; }
+      .stat-item { min-width: 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 20px; }
+      .stat-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.08); }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-image { aspect-ratio: 4/3; }
+      .services-grid { grid-template-columns: 1fr; gap: 2px; }
+      .why-grid { grid-template-columns: 1fr; gap: 32px; }
+      .services-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .contact-details { flex-direction: column; align-items: center; gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Dr. <span>Rodrigo</span> Schwartz</a>
+  <ul class="nav-links">
+    <li><a href="#about">El Doctor</a></li>
+    <li><a href="#services">Especialidades</a></li>
+    <li><a href="#faq">Preguntas</a></li>
+    <li><a href="#cta" class="nav-cta">Agendar Hora</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-label">Dr. Rodrigo Schwartz · Dermato-Oncología</p>
+    <h1 class="hero-title">
+      Cuidado <em>experto</em><br>del Cáncer de Piel.
+    </h1>
+    <p class="hero-sub">
+      Dermatólogo y Cirujano de Mohs con más de 20 años de experiencia,
+      certificado en Chile, Canadá y Australia.
+    </p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn-primary">Agendar Evaluación</a>
+      <a href="#services" class="btn-outline">Ver Especialidades</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Descubrir</div>
+</section>
+
+<!-- STATS BAR -->
+<div id="stats">
+  <div class="stat-item reveal">
+    <div class="stat-num">20<sup>+</sup></div>
+    <div class="stat-label">Años de experiencia</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-1">
+    <div class="stat-num">3K<sup>+</sup></div>
+    <div class="stat-label">Cirugías de Mohs</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-2">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Países de certificación</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-3">
+    <div class="stat-num">1°</div>
+    <div class="stat-label">Referente en Chile</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label reveal">El Doctor</p>
+        <h2 class="section-title reveal reveal-delay-1">
+          Una trayectoria construida en<br><em>tres continentes.</em>
+        </h2>
+        <p class="reveal reveal-delay-2">
+          Soy Dermatólogo Oncólogo y Cirujano de Mohs con entrenamiento formal
+          en las instituciones más prestigiosas del mundo: Melanoma Institute Australia,
+          University of Toronto y el National Cancer Institute.
+        </p>
+        <p class="reveal reveal-delay-2">
+          Mi filosofía es otorgar una atención integral, humana y personalizada.
+          Cada paciente merece el tiempo, la tecnología y el criterio clínico
+          necesarios para tomar las mejores decisiones sobre su salud.
+        </p>
+        <div class="about-credentials reveal reveal-delay-3">
+          <div class="credential-item">Melanoma Institute Australia — Sydney</div>
+          <div class="credential-item">University of Toronto — División de Dermatología</div>
+          <div class="credential-item">National Cancer Institute — Washington DC</div>
+          <div class="credential-item">Clínica Las Condes — Santiago de Chile</div>
+          <div class="credential-item">Miembro ISDCS · Sociedad Chilena de Dermatología</div>
+        </div>
+      </div>
+      <div class="about-image reveal reveal-delay-2">
+        <img
+          src="img/about-dr.jpg"
+          alt="Dr. Rodrigo Schwartz"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <div>
+        <p class="section-label reveal">Especialidades</p>
+        <h2 class="section-title reveal reveal-delay-1">
+          Diagnóstico y tratamiento<br><em>de precisión.</em>
+        </h2>
+      </div>
+      <a href="#cta" class="btn-outline-dark reveal reveal-delay-2" style="white-space:nowrap">Ver todas →</a>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <h3 class="service-title">Cáncer de Piel</h3>
+        <p class="service-desc">Diagnóstico y manejo integral de todas las formas de cáncer cutáneo, con enfoque preventivo y curación de alta tasa.</p>
+        <a href="#" class="service-link">Más información →</a>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-num">02</div>
+        <h3 class="service-title">Melanoma</h3>
+        <p class="service-desc">Especialización en el manejo del melanoma maligno, el más agresivo de los cánceres cutáneos, con protocolos actualizados.</p>
+        <a href="#" class="service-link">Más información →</a>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-num">03</div>
+        <h3 class="service-title">Carcinoma Basocelular</h3>
+        <p class="service-desc">Tratamiento del carcinoma basocelular, el tipo más frecuente de cáncer de piel, con opciones quirúrgicas y no quirúrgicas.</p>
+        <a href="#" class="service-link">Más información →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">04</div>
+        <h3 class="service-title">Cirugía de Mohs</h3>
+        <p class="service-desc">La técnica con mayor tasa de curación y menor impacto estético para cánceres de piel faciales. Referente en Chile.</p>
+        <a href="https://mohs.cl" class="service-link" target="_blank">Ver sitio dedicado →</a>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-num">05</div>
+        <h3 class="service-title">Control de Lunares</h3>
+        <p class="service-desc">Chequeo anual dermatológico exhaustivo con dermoscopia digital para detectar lesiones sospechosas a tiempo.</p>
+        <a href="#" class="service-link">Más información →</a>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-num">06</div>
+        <h3 class="service-title">Dermoscopia Digital</h3>
+        <p class="service-desc">Seguimiento fotográfico preciso de lesiones pigmentadas para evitar cirugías innecesarias y detectar cambios tempranos.</p>
+        <a href="#" class="service-link">Más información →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="container">
+    <p class="section-label reveal">Por qué elegirnos</p>
+    <h2 class="section-title reveal reveal-delay-1">Cuatro pilares que definen<br>nuestra <em>diferencia.</em></h2>
+    <div class="why-grid">
+      <div class="why-item reveal reveal-delay-1">
+        <div class="why-num">01</div>
+        <h3 class="why-title">Atención de Excelencia</h3>
+        <p class="why-desc">Cada consulta es un espacio de escucha real. Entregamos diagnósticos claros, tiempo de calidad y acompañamiento en cada etapa.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-2">
+        <div class="why-num">02</div>
+        <h3 class="why-title">Educación Continua</h3>
+        <p class="why-desc">Formación permanente en los centros oncológicos más avanzados del mundo, para traer lo último de la evidencia a cada paciente.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-3">
+        <div class="why-num">03</div>
+        <h3 class="why-title">Tecnología de Punta</h3>
+        <p class="why-desc">Dermoscopia digital, fotomapeo corporal y técnicas quirúrgicas de última generación para diagnósticos más precisos y seguros.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-4">
+        <div class="why-num">04</div>
+        <h3 class="why-title">Docencia e Investigación</h3>
+        <p class="why-desc">Compromiso con la formación de nuevas generaciones de especialistas y la producción de conocimiento en dermato-oncología.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section id="testimonial">
+  <div class="container" style="max-width:800px">
+    <span class="quote-mark reveal">"</span>
+    <blockquote class="quote-text reveal reveal-delay-1">
+      El doctor Schwartz no solo me trató el cáncer de piel. Me dio tranquilidad,
+      información real y un seguimiento que me hizo sentir acompañado en todo momento.
+    </blockquote>
+    <p class="quote-author reveal reveal-delay-2">— Pedro Cortez Navia · Paciente</p>
+  </div>
+</section>
+
+<!-- AFFILIATIONS -->
+<section id="affiliations" style="padding:80px 48px">
+  <div class="container">
+    <p class="affiliations-label reveal">Formación · Afiliaciones · Instituciones</p>
+    <div class="affiliations-grid">
+      <span class="affiliation-tag reveal">Clínica Las Condes</span>
+      <span class="affiliation-tag reveal reveal-delay-1">University of Toronto</span>
+      <span class="affiliation-tag reveal reveal-delay-2">National Cancer Institute</span>
+      <span class="affiliation-tag reveal reveal-delay-3">Melanoma Institute Australia</span>
+      <span class="affiliation-tag reveal">ISDCS</span>
+      <span class="affiliation-tag reveal reveal-delay-1">Soc. Chilena de Dermatología</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <p class="section-label reveal">Preguntas frecuentes</p>
+    <h2 class="section-title reveal reveal-delay-1">Lo que más nos <em>preguntan.</em></h2>
+    <div class="faq-list reveal reveal-delay-2">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">¿Cómo sé si un lunar es peligroso?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Utilizamos la regla ABCDE: Asimetría, Bordes irregulares, Color no uniforme, Diámetro mayor a 6mm y Evolución. Sin embargo, el ojo clínico entrenado y la dermoscopia digital son indispensables para una evaluación confiable. La autoexploración es útil, pero no reemplaza el control anual profesional.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">¿Qué es la Cirugía de Mohs y cuándo se indica?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          La Cirugía de Mohs es la técnica con la tasa de curación más alta para ciertos cánceres de piel, especialmente en zonas faciales o de riesgo. Se extirpa el tumor en capas, examinando cada una al microscopio, hasta que no queden células cancerosas. El resultado es la máxima preservación del tejido sano.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">¿Con qué frecuencia debo hacerme un control dermatológico?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Para pacientes sin antecedentes, recomendamos un control anual a partir de los 30 años, o antes si hay historia familiar de melanoma, piel clara, o exposición solar intensa. Quienes ya han tenido un cáncer de piel requieren controles más frecuentes, generalmente cada 3 a 6 meses.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">¿Es el cáncer de piel tratable si se detecta a tiempo?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Sí. La mayoría de los cánceres de piel detectados en etapas tempranas tienen tasas de curación superiores al 95%. El melanoma, aunque más agresivo, también tiene excelente pronóstico cuando se encuentra en estadio inicial. Por eso la prevención y el control regular son fundamentales.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">¿Cómo puedo agendar una hora de evaluación?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Puede contactarnos directamente por WhatsApp al +56 9 3954 7142, escribirnos a contacto@drschwartz.cl, o usar el botón de agendamiento en este sitio. Atendemos en DermaKlinic, Av. La Dehesa 222 Of. 620, Las Condes, Santiago.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container" style="max-width:700px;margin:0 auto;text-align:center">
+    <p class="section-label reveal">Agenda tu evaluación</p>
+    <h2 class="cta-title reveal reveal-delay-1">
+      El mejor momento<br>para cuidar tu piel<br>es <em>ahora.</em>
+    </h2>
+    <p class="cta-sub reveal reveal-delay-2">
+      Solicita tu hora de evaluación con el Dr. Schwartz.
+      Primera consulta disponible en DermaKlinic, Las Condes.
+    </p>
+    <div class="cta-actions reveal reveal-delay-3">
+      <a href="https://wa.me/56939547142" class="btn-gold" target="_blank">WhatsApp →</a>
+      <a href="mailto:contacto@drschwartz.cl" class="btn-outline">Enviar correo</a>
+    </div>
+    <div class="contact-details reveal reveal-delay-4">
+      <div class="contact-item">
+        <span>Teléfono</span>
+        <strong>+56 9 3954 7142</strong>
+      </div>
+      <div class="contact-item">
+        <span>Email</span>
+        <strong>contacto@drschwartz.cl</strong>
+      </div>
+      <div class="contact-item">
+        <span>Dirección</span>
+        <strong>Av. La Dehesa 222 Of. 620, Santiago</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Dr. Rodrigo Schwartz · Dermatología Oncológica</span>
+  <div class="footer-links">
+    <a href="https://instagram.com" target="_blank">Instagram</a>
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    <a href="https://mohs.cl" target="_blank">mohs.cl</a>
+  </div>
+  <span class="footer-copy">© 2025 Dr. Rodrigo Schwartz</span>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.me/56939547142" class="whatsapp-fab" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  // Hero loaded
+  document.getElementById('hero').classList.add('loaded');
+
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>
