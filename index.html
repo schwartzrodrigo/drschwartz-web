@@ -108,31 +108,45 @@
       min-height: 700px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       overflow: hidden;
     }
     .hero-bg {
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to bottom, rgba(36,26,17,0.2) 0%, rgba(36,26,17,0.45) 50%, rgba(36,26,17,0.80) 100%),
-        url('img/hero-bg.jpg') center/cover no-repeat;
+        radial-gradient(120% 100% at 75% 30%, rgba(70,52,36,0.6) 0%, rgba(30,22,15,0.95) 70%),
+        linear-gradient(to right, #1a130d 0%, #2a1f15 100%);
       transform: scale(1.04);
       transition: transform 8s ease-out;
     }
     #hero.loaded .hero-bg { transform: scale(1); }
     .hero-content {
       position: relative;
-      text-align: center;
-      max-width: 900px;
-      padding: 0 32px;
+      text-align: left;
+      max-width: 45%;
+      padding: 0 0 0 64px;
     }
+    .hero-photo {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 88%;
+      width: 52%;
+      object-fit: cover;
+      object-position: center top;
+      opacity: 0;
+      animation: fadeUp 1s 0.6s forwards;
+      pointer-events: none;
+    }
+    @media (max-width: 768px) { .hero-photo { display: none; } }
     .hero-label {
-      font-size: 11px;
-      letter-spacing: 0.25em;
+      font-size: 15px;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--tan-light);
       margin-bottom: 28px;
+      white-space: nowrap;
       opacity: 0;
       transform: translateY(16px);
       animation: fadeUp 0.9s 0.3s forwards;
@@ -158,9 +172,9 @@
       font-size: 16px;
       font-weight: 300;
       color: rgba(250,248,245,0.75);
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
+      max-width: 480px;
+      margin-left: 0;
+      margin-right: 0;
       opacity: 0;
       transform: translateY(20px);
       animation: fadeUp 1s 0.75s forwards;
@@ -169,7 +183,7 @@
       margin-top: 44px;
       display: flex;
       gap: 16px;
-      justify-content: center;
+      justify-content: flex-start;
       flex-wrap: wrap;
       opacity: 0;
       transform: translateY(20px);
@@ -272,10 +286,10 @@
     section { padding: 120px 48px; }
     .container { max-width: 1100px; margin: 0 auto; }
     .section-label {
-      font-size: 10px;
-      letter-spacing: 0.3em;
+      font-size: 11px;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--tan);
+      color: var(--brown);
       margin-bottom: 20px;
     }
     .section-title {
@@ -336,6 +350,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: top center;
       filter: sepia(10%) contrast(1.02);
       transition: transform 6s ease-out;
     }
@@ -450,65 +465,124 @@
 
     /* ── TESTIMONIAL ── */
     #testimonial {
-      background: var(--tan);
-      padding: 100px 48px;
-      text-align: center;
+      background: var(--cream-dark);
+      padding: 80px 48px;
     }
-    .quote-mark {
-      font-family: var(--font-display);
-      font-size: 120px;
-      line-height: 0.6;
-      color: var(--white);
-      opacity: 0.4;
-      display: block;
-      margin-bottom: 16px;
-    }
-    .quote-text {
-      font-family: var(--font-display);
-      font-size: clamp(22px, 3vw, 34px);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--white);
-      max-width: 760px;
-      margin: 0 auto;
-      line-height: 1.5;
-    }
-    .quote-author {
-      margin-top: 32px;
-      font-size: 12px;
+    .testimonial-label {
+      font-size: 11px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(250,248,245,0.7);
+      color: var(--brown);
+      margin-bottom: 12px;
+    }
+    .testimonial-heading {
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 300;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+    .testimonial-stars {
+      color: var(--tan);
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-bottom: 48px;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .review-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .review-card-stars {
+      color: #c9a96e;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+    .review-card-text {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--charcoal);
+      flex: 1;
+    }
+    .review-card-author {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-top: 4px;
+    }
+    @media (max-width: 600px) {
+      .reviews-grid { grid-template-columns: 1fr; }
+      #testimonial { padding: 60px 24px; }
     }
 
     /* ── AFFILIATIONS ── */
-    #affiliations { background: var(--cream); padding: 80px 48px; }
+    #affiliations { background: var(--cream); padding: 72px 48px; }
     .affiliations-label {
       text-align: center;
-      font-size: 10px;
-      letter-spacing: 0.3em;
+      font-size: 13px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--brown-light);
-      margin-bottom: 48px;
+      color: var(--brown);
+      margin-bottom: 40px;
     }
     .affiliations-grid {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 16px 24px;
+      gap: 12px;
+      max-width: 620px;
+      margin: 0 auto;
     }
     .affiliation-tag {
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--brown-mid);
-      padding: 10px 20px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 18px 28px;
       border: 1px solid rgba(184,149,106,0.3);
-      border-radius: 100px;
-      transition: border-color 0.3s, color 0.3s, background 0.3s;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.6);
+      transition: border-color 0.3s, background 0.3s;
     }
-    .affiliation-tag:hover { border-color: var(--tan); color: var(--tan-dark); background: rgba(184,149,106,0.07); }
+    .affiliation-tag:hover { border-color: var(--tan); background: rgba(255,255,255,0.9); }
+    .affiliation-tag .aff-acronym {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tan-dark);
+      white-space: nowrap;
+      min-width: 80px;
+    }
+    .affiliation-tag .aff-name {
+      font-size: 15px;
+      color: var(--charcoal);
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+    .affiliation-divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(184,149,106,0.3);
+      flex-shrink: 0;
+    }
+    @media (max-width: 680px) {
+      .affiliation-tag .aff-name { white-space: normal; font-size: 14px; }
+      .affiliations-grid { max-width: 100%; }
+    }
+    @media (max-width: 600px) {
+      #affiliations { padding: 60px 24px; }
+    }
 
     /* ── FAQ ── */
     #faq { background: var(--white); }
@@ -558,9 +632,17 @@
       overflow: hidden;
       transition: max-height 0.5s ease, padding 0.4s;
     }
-    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 28px; }
+    .faq-item.open .faq-a { max-height: 600px; padding-bottom: 28px; }
+
+    /* ── EDUCACIÓN SECTION ── */
+    #educacion { background: var(--cream); }
+    #educacion .faq-a { max-height: 0; }
+    #educacion .faq-item.open .faq-a { max-height: 1200px; padding-bottom: 28px; }
+    .edu-photo { width: 100%; max-width: 560px; height: 320px; border-radius: 12px; margin-top: 24px; display: block; object-fit: cover; object-position: center; }
+    @media (max-width: 600px) { .edu-photo { max-width: 100%; height: 220px; } }
 
     /* ── CTA SECTION ── */
+    #cta .section-label { color: var(--tan-light); }
     #cta {
       background: var(--brown);
       padding: 140px 48px;
@@ -710,7 +792,7 @@
     .whatsapp-fab svg { width: 26px; height: 26px; fill: white; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       nav { padding: 20px 24px; }
       nav.scrolled { padding: 14px 24px; }
       .nav-links { display: none; }
@@ -725,6 +807,17 @@
       .services-header { flex-direction: column; align-items: flex-start; gap: 20px; }
       footer { flex-direction: column; align-items: flex-start; }
       .contact-details { flex-direction: column; align-items: center; gap: 24px; }
+      #hero { justify-content: center; align-items: flex-end; padding-bottom: 60px; }
+      .hero-title { font-size: 38px; }
+      .hero-label { font-size: 14px; }
+      .hero-content { max-width: 100%; padding: 0 28px; text-align: center; }
+      .hero-sub { margin-left: auto; margin-right: auto; max-width: 100%; }
+      .hero-actions { justify-content: center; }
+      .hero-bg {
+        background:
+          linear-gradient(to bottom, rgba(20,15,10,0.1) 0%, rgba(20,15,10,0.25) 40%, rgba(20,15,10,0.85) 100%),
+          url('img/about-dr.jpg') center top/cover no-repeat !important;
+      }
     }
   </style>
 </head>
@@ -735,15 +828,16 @@
   <a href="#" class="nav-logo">Dr. <span>Rodrigo</span> Schwartz</a>
   <ul class="nav-links">
     <li><a href="#about">El Doctor</a></li>
-    <li><a href="#services">Especialidades</a></li>
+    <li><a href="resena.html">Reseña</a></li>
     <li><a href="#faq">Preguntas</a></li>
-    <li><a href="#cta" class="nav-cta">Agendar Hora</a></li>
+    <li><a href="https://a3bea3a262553b6628912d796aa36e5c84682cc1.agenda.softwaremedilink.com/agenda?modalidad=1" class="nav-cta" target="_blank">Agendar Hora</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
+  <img class="hero-photo" src="img/about-dr.jpg" alt="Dr. Rodrigo Schwartz">
   <div class="hero-content">
     <p class="hero-label">Dr. Rodrigo Schwartz · Dermato-Oncología</p>
     <h1 class="hero-title">
@@ -754,10 +848,9 @@
       con entrenamiento certificado en Canadá y Australia.
     </p>
     <div class="hero-actions">
-      <a href="#cta" class="btn-primary">Agendar Evaluación</a>
+      <a href="https://a3bea3a262553b6628912d796aa36e5c84682cc1.agenda.softwaremedilink.com/agenda?modalidad=1" class="btn-primary" target="_blank">Agendar Evaluación</a>
     </div>
   </div>
-  <div class="hero-scroll">Descubrir</div>
 </section>
 
 <!-- STATS BAR -->
@@ -770,14 +863,6 @@
     <div class="stat-num">3K<sup>+</sup></div>
     <div class="stat-label">Cirugías de Mohs</div>
   </div>
-  <div class="stat-item reveal reveal-delay-2">
-    <div class="stat-num">3</div>
-    <div class="stat-label">Países de certificación</div>
-  </div>
-  <div class="stat-item reveal reveal-delay-3">
-    <div class="stat-num">1°</div>
-    <div class="stat-label">Referente en Chile</div>
-  </div>
 </div>
 
 <!-- ABOUT -->
@@ -787,29 +872,20 @@
       <div class="about-text">
         <p class="section-label reveal">El Doctor</p>
         <h2 class="section-title reveal reveal-delay-1">
-          Una trayectoria construida en<br><em>tres continentes.</em>
+          Experiencia y formación<br><em>de excelencia.</em>
         </h2>
         <p class="reveal reveal-delay-2">
-          Soy Dermatólogo Oncólogo y Cirujano de Mohs con entrenamiento formal
-          en las instituciones más prestigiosas del mundo: Melanoma Institute Australia,
-          University of Toronto y el National Cancer Institute.
+          Soy Dermatólogo y Cirujano de Mohs con más de 20 años de experiencia,
+          especialista en cáncer de piel desde el diagnóstico hasta el tratamiento quirúrgico,
+          con entrenamiento formal y certificado en Chile, Canadá y Australia.
         </p>
         <p class="reveal reveal-delay-2">
-          Mi filosofía es otorgar una atención integral, humana y personalizada.
-          Cada paciente merece el tiempo, la tecnología y el criterio clínico
-          necesarios para tomar las mejores decisiones sobre su salud.
+          Busco otorgar una atención integral, humana y personalizada.
         </p>
-        <div class="about-credentials reveal reveal-delay-3">
-          <div class="credential-item">Melanoma Institute Australia — Sydney</div>
-          <div class="credential-item">University of Toronto — División de Dermatología</div>
-          <div class="credential-item">National Cancer Institute — Washington DC</div>
-          <div class="credential-item">Clínica Las Condes — Santiago de Chile</div>
-          <div class="credential-item">Miembro ISDCS · Sociedad Chilena de Dermatología</div>
-        </div>
       </div>
       <div class="about-image reveal reveal-delay-2">
         <img
-          src="img/about-dr.jpg"
+          src="img/dr-mascarilla.jpg"
           alt="Dr. Rodrigo Schwartz"
           loading="lazy"
         />
@@ -828,74 +904,44 @@
           Diagnóstico y tratamiento<br><em>de precisión.</em>
         </h2>
       </div>
-      <a href="#cta" class="btn-outline-dark reveal reveal-delay-2" style="white-space:nowrap">Ver todas →</a>
+      <a href="#services" class="btn-outline-dark reveal reveal-delay-2" style="white-space:nowrap">Ver todas →</a>
     </div>
     <div class="services-grid">
       <div class="service-card reveal">
         <div class="service-num">01</div>
         <h3 class="service-title">Cáncer de Piel</h3>
-        <p class="service-desc">Diagnóstico y manejo integral de todas las formas de cáncer cutáneo, con enfoque preventivo y curación de alta tasa.</p>
-        <a href="#" class="service-link">Más información →</a>
+        <p class="service-desc">Diagnóstico y manejo integral de todas las formas de cáncer cutáneo: carcinoma basocelular, carcinoma espinocelular y melanoma.</p>
+        <a href="#edu-cancer-piel" class="service-link">Más información →</a>
       </div>
       <div class="service-card reveal reveal-delay-1">
         <div class="service-num">02</div>
         <h3 class="service-title">Melanoma</h3>
-        <p class="service-desc">Especialización en el manejo del melanoma maligno, el más agresivo de los cánceres cutáneos, con protocolos actualizados.</p>
-        <a href="#" class="service-link">Más información →</a>
+        <p class="service-desc">Especialización en el principal centro de melanoma a nivel mundial (Melanoma Institute Australia). El melanoma es el más agresivo de los cánceres cutáneos, con protocolos actualizados de diagnóstico y tratamiento.</p>
+        <a href="#edu-melanoma" class="service-link">Más información →</a>
       </div>
       <div class="service-card reveal reveal-delay-2">
         <div class="service-num">03</div>
         <h3 class="service-title">Carcinoma Basocelular</h3>
         <p class="service-desc">Tratamiento del carcinoma basocelular, el tipo más frecuente de cáncer de piel, con opciones quirúrgicas y no quirúrgicas.</p>
-        <a href="#" class="service-link">Más información →</a>
+        <a href="#edu-basocelular" class="service-link">Más información →</a>
       </div>
       <div class="service-card reveal">
         <div class="service-num">04</div>
         <h3 class="service-title">Cirugía de Mohs</h3>
-        <p class="service-desc">La técnica con mayor tasa de curación y menor impacto estético para cánceres de piel faciales. Referente en Chile.</p>
+        <p class="service-desc">Especialización en Women's College Hospital en Toronto, Canadá. La técnica con mayor tasa de curación y menor impacto estético para cánceres de piel faciales.</p>
         <a href="https://mohs.cl" class="service-link" target="_blank">Ver sitio dedicado →</a>
       </div>
       <div class="service-card reveal reveal-delay-1">
         <div class="service-num">05</div>
         <h3 class="service-title">Control de Lunares</h3>
         <p class="service-desc">Chequeo anual dermatológico exhaustivo con dermoscopia digital para detectar lesiones sospechosas a tiempo.</p>
-        <a href="#" class="service-link">Más información →</a>
+        <a href="#edu-chequeo" class="service-link">Más información →</a>
       </div>
       <div class="service-card reveal reveal-delay-2">
         <div class="service-num">06</div>
-        <h3 class="service-title">Dermoscopia Digital</h3>
-        <p class="service-desc">Seguimiento fotográfico preciso de lesiones pigmentadas para evitar cirugías innecesarias y detectar cambios tempranos.</p>
-        <a href="#" class="service-link">Más información →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY -->
-<section id="why">
-  <div class="container">
-    <p class="section-label reveal">Por qué elegirnos</p>
-    <h2 class="section-title reveal reveal-delay-1">Cuatro pilares que definen<br>nuestra <em>diferencia.</em></h2>
-    <div class="why-grid">
-      <div class="why-item reveal reveal-delay-1">
-        <div class="why-num">01</div>
-        <h3 class="why-title">Atención de Excelencia</h3>
-        <p class="why-desc">Cada consulta es un espacio de escucha real. Entregamos diagnósticos claros, tiempo de calidad y acompañamiento en cada etapa.</p>
-      </div>
-      <div class="why-item reveal reveal-delay-2">
-        <div class="why-num">02</div>
-        <h3 class="why-title">Educación Continua</h3>
-        <p class="why-desc">Formación permanente en los centros oncológicos más avanzados del mundo, para traer lo último de la evidencia a cada paciente.</p>
-      </div>
-      <div class="why-item reveal reveal-delay-3">
-        <div class="why-num">03</div>
-        <h3 class="why-title">Tecnología de Punta</h3>
-        <p class="why-desc">Dermoscopia digital, fotomapeo corporal y técnicas quirúrgicas de última generación para diagnósticos más precisos y seguros.</p>
-      </div>
-      <div class="why-item reveal reveal-delay-4">
-        <div class="why-num">04</div>
-        <h3 class="why-title">Docencia e Investigación</h3>
-        <p class="why-desc">Compromiso con la formación de nuevas generaciones de especialistas y la producción de conocimiento en dermato-oncología.</p>
+        <h3 class="service-title">Dermatoscopía Digital</h3>
+        <p class="service-desc">Seguimiento fotográfico preciso de lesiones pigmentadas, asistido por inteligencia artificial, para evitar cirugías innecesarias y detectar cambios tempranos.</p>
+        <a href="#educacion" class="service-link">Más información →</a>
       </div>
     </div>
   </div>
@@ -903,27 +949,176 @@
 
 <!-- TESTIMONIAL -->
 <section id="testimonial">
-  <div class="container" style="max-width:800px">
-    <span class="quote-mark reveal">"</span>
-    <blockquote class="quote-text reveal reveal-delay-1">
-      El doctor Schwartz no solo me trató el cáncer de piel. Me dio tranquilidad,
-      información real y un seguimiento que me hizo sentir acompañado en todo momento.
-    </blockquote>
-    <p class="quote-author reveal reveal-delay-2">— Pedro Cortez Navia · Paciente</p>
+  <div class="container" style="max-width:900px; text-align:center">
+    <p class="testimonial-label reveal">Lo que dicen nuestros pacientes</p>
+    <h2 class="testimonial-heading reveal reveal-delay-1">Opiniones reales<br><em>de Google</em></h2>
+    <div class="testimonial-stars reveal reveal-delay-1">★★★★★ &nbsp;4.9 · 70 opiniones</div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-card-stars">★★★★★</div>
+        <p class="review-card-text">"Excelente experiencia con el Dr. Schwartz, tanto por el aspecto médico como el humano."</p>
+        <p class="review-card-author">Laura Taub · Paciente</p>
+      </div>
+      <div class="review-card reveal reveal-delay-1">
+        <div class="review-card-stars">★★★★★</div>
+        <p class="review-card-text">"El doctor Rodrigo muy atento, detallista, explica excelente, soluciones rápidas y eficientes. Llegamos al mejor lugar. Gracias por todo — desde Antofagasta vinimos a ver al doctor."</p>
+        <p class="review-card-author">Patricia Jara Lorca · Paciente</p>
+      </div>
+      <div class="review-card reveal reveal-delay-2">
+        <div class="review-card-stars">★★★★★</div>
+        <p class="review-card-text">"Muy buena experiencia, el doctor Rodrigo Schwartz súper dedicado, atento y nos explicó todo muy claro. Fue una muy grata experiencia."</p>
+        <p class="review-card-author">Constanza Castro · Paciente</p>
+      </div>
+      <div class="review-card reveal reveal-delay-3">
+        <div class="review-card-stars">★★★★★</div>
+        <p class="review-card-text">"Me atiendo con el doctor Schwartz hace muchos años y no lo cambiaría por nada. Excelente equipo médico, muy atentos y preocupados con el paciente."</p>
+        <p class="review-card-author">Bianca Matei · Paciente</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- AFFILIATIONS -->
 <section id="affiliations" style="padding:80px 48px">
   <div class="container">
-    <p class="affiliations-label reveal">Formación · Afiliaciones · Instituciones</p>
+    <p class="affiliations-label reveal">Afiliaciones</p>
     <div class="affiliations-grid">
-      <span class="affiliation-tag reveal">Clínica Las Condes</span>
-      <span class="affiliation-tag reveal reveal-delay-1">University of Toronto</span>
-      <span class="affiliation-tag reveal reveal-delay-2">National Cancer Institute</span>
-      <span class="affiliation-tag reveal reveal-delay-3">Melanoma Institute Australia</span>
-      <span class="affiliation-tag reveal">ISDCS</span>
-      <span class="affiliation-tag reveal reveal-delay-1">Soc. Chilena de Dermatología</span>
+      <div class="affiliation-tag reveal">
+        <span class="aff-acronym">SOCHIDERM</span>
+        <div class="affiliation-divider"></div>
+        <span class="aff-name">Sociedad Chilena de Dermatología</span>
+      </div>
+      <div class="affiliation-tag reveal reveal-delay-1">
+        <span class="aff-acronym">CILAD</span>
+        <div class="affiliation-divider"></div>
+        <span class="aff-name">Colegio Ibero-Latinoamericano de Dermatología</span>
+      </div>
+      <div class="affiliation-tag reveal reveal-delay-2">
+        <span class="aff-acronym">EADO</span>
+        <div class="affiliation-divider"></div>
+        <span class="aff-name">European Association of Dermato-Oncology</span>
+      </div>
+      <div class="affiliation-tag reveal reveal-delay-3">
+        <span class="aff-acronym">IDS</span>
+        <div class="affiliation-divider"></div>
+        <span class="aff-name">International Dermoscopy Society</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCACIÓN -->
+<section id="educacion">
+  <div class="container">
+    <p class="section-label reveal">Información para pacientes</p>
+    <h2 class="section-title reveal reveal-delay-1">Lo que debes saber sobre<br><em>el cáncer de piel.</em></h2>
+    <div class="faq-list reveal reveal-delay-2">
+
+      <div class="faq-item" id="edu-cancer-piel">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">Cáncer de Piel</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          El cáncer de piel es el más frecuente de todos los cánceres que afectan al ser humano. Se origina cuando las células de la piel crecen de manera descontrolada, generalmente como consecuencia de la exposición acumulada a la radiación ultravioleta del sol.<br><br>
+          Existen tres tipos principales: el carcinoma basocelular, el carcinoma espinocelular y el melanoma. Los dos primeros son los más comunes y, cuando se detectan a tiempo, tienen una tasa de curación muy alta. El melanoma es menos frecuente pero más agresivo.<br><br>
+          La buena noticia es que el cáncer de piel es uno de los pocos cánceres que puede prevenirse y detectarse en etapas muy tempranas con un control dermatológico regular.
+          <img class="edu-photo" src="img/edu-cancer-piel.jpg" alt="Tipos de células de la piel">
+        </div>
+      </div>
+
+      <div class="faq-item" id="edu-melanoma">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">Melanoma</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          El melanoma es el tipo de cáncer de piel más agresivo. Se origina en los melanocitos — las células responsables de dar color a la piel — y tiene una alta tendencia a extenderse a otros órganos si no se detecta a tiempo. Sin embargo, en más del 90% de los casos el diagnóstico es precoz, lo que lo hace curable en la gran mayoría de los pacientes.<br><br>
+          <strong>¿Por qué se produce?</strong><br>
+          Su origen es multifactorial. El factor ambiental más importante es la radiación ultravioleta, que daña el ADN de los melanocitos. Las quemaduras solares ocasionales y severas — especialmente en la infancia — son las que generan mayor riesgo. También influyen factores genéticos: existen genes específicos que, al presentar mutaciones, predisponen al desarrollo de melanoma. En aproximadamente un 60% de los casos aparece de forma espontánea; en el resto, se origina a partir de un lunar benigno que se maligniza.<br><br>
+          <strong>¿Cómo se clasifica?</strong><br>
+          El parámetro más importante es el Índice de Breslow, que mide el grosor del tumor y determina el tratamiento necesario. Se considera precoz cuando mide menos de 1 mm. La etapificación va desde etapa 0 (melanoma in situ, confinado a la epidermis) hasta etapa IV (con metástasis a distancia).<br><br>
+          <strong>Tratamiento:</strong><br>
+          En casos precoces, se realiza una ampliación oncológica (extirpar un margen de piel adicional alrededor del tumor). Cuando el melanoma supera 1 mm, se agrega el estudio del ganglio centinela para detectar si hay extensión. En casos avanzados se utilizan tratamientos sistémicos y/o radioterapia.<br><br>
+          <strong>Seguimiento:</strong><br>
+          Tras el diagnóstico, los controles tienen tres objetivos: detectar precozmente un nuevo melanoma, identificar reaparición del ya tratado, y reforzar la educación en protección solar y autoexamen. Tener antecedente de melanoma aumenta en un 8% la probabilidad de desarrollar uno nuevo; tener un familiar de primer grado con melanoma multiplica el riesgo por 2 a 3.
+          <img class="edu-photo" src="img/edu-melanoma.jpg" alt="Evaluación de melanoma">
+        </div>
+      </div>
+
+      <div class="faq-item" id="edu-basocelular">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">Carcinoma Basocelular</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          El carcinoma basocelular es el cáncer más frecuente que afecta al ser humano. Aunque puede presentarse a cualquier edad, es más común en mayores de 50 años — aunque su incidencia en personas jóvenes está aumentando.<br><br>
+          Se origina en las células basales de la epidermis y se presenta típicamente como una pápula de crecimiento lento, de color piel o con algo de pigmentación, que puede ulcerarse y aparecer como una herida que no sana o una costra que vuelve a aparecer.<br><br>
+          <strong>¿Cuán peligroso es?</strong><br>
+          Su riesgo de diseminarse a otros órganos es extremadamente bajo (0,55%). El principal riesgo es la invasión local hacia tejidos profundos como grasa subcutánea, músculo, cartílago o hueso — un proceso lento que puede demorar años. Los subtipos morfeiforme y micronodular son los más agresivos localmente; el superficial y el nodular, los menos.<br><br>
+          <strong>Tratamiento:</strong><br>
+          El tratamiento es habitualmente quirúrgico. En tumores de bajo riesgo y subtipos superficiales pueden usarse alternativas no quirúrgicas (nitrógeno líquido, Imiquimod, 5-Fluoracilo, Terapia Fotodinámica). Para tumores en zonas faciales o de riesgo, la Cirugía de Mohs ofrece la menor tasa de recurrencia disponible (menor al 2%), versus el 5–10% de la cirugía convencional.<br><br>
+          <strong>Dato importante:</strong><br>
+          Quien ha tenido un carcinoma basocelular tiene aproximadamente un 44% de probabilidad de desarrollar otro en los siguientes 3 años — diez veces más que la población general. El seguimiento periódico es fundamental.
+          <img class="edu-photo" src="img/edu-basocelular.jpg" alt="Carcinoma basocelular">
+        </div>
+      </div>
+
+      <div class="faq-item" id="edu-espinocelular">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">Carcinoma Espinocelular</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          El carcinoma espinocelular es el segundo tipo de cáncer de piel más frecuente. Se deriva de los queratinocitos — las células que producen queratina en la epidermis — y, a diferencia del basocelular, tiene mayor capacidad de diseminarse a otros órganos si no se trata a tiempo.<br><br>
+          <strong>¿Quiénes tienen mayor riesgo?</strong><br>
+          Es más frecuente en hombres de edad avanzada, aunque afecta también a mujeres y adultos jóvenes. Los factores de riesgo incluyen: antecedente personal de cáncer de piel, queratosis actínica (lesión pre-maligna), exposición solar laboral o recreativa prolongada, tabaquismo, piel clara, inmunosupresión (especialmente receptores de trasplantes de órganos, que tienen un riesgo muy elevado), y ciertos virus (papilomavirus humano).<br><br>
+          <strong>¿Cómo se presenta?</strong><br>
+          Aparece como una lesión escamosa, con costra o ulcerada que crece durante semanas o meses. Puede ser sensible o dolorosa. Se localiza principalmente en zonas expuestas al sol: cara, labios, orejas, manos y antebrazos. También puede desarrollarse sobre queratosis actínicas preexistentes, cicatrices o piel previamente irradiada.<br><br>
+          <strong>Tratamiento:</strong><br>
+          Casi siempre es quirúrgico, con un margen de tejido normal de 3 a 10 mm. En lesiones grandes de cara o tumores recurrentes, la Cirugía de Mohs es la mejor alternativa. En tumores inoperables puede utilizarse radioterapia. La detección precoz es clave: en etapas iniciales, el tratamiento es altamente curativo.
+          <img class="edu-photo" src="img/edu-espinocelular.png" alt="Carcinoma espinocelular">
+        </div>
+      </div>
+
+      <div class="faq-item" id="edu-mohs">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">Cirugía Micrográfica de Mohs</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          La Cirugía de Mohs es la técnica quirúrgica con la mayor tasa de curación para el cáncer de piel, especialmente en zonas faciales donde preservar el tejido sano es fundamental. En Estados Unidos, uno de cada cuatro cánceres de piel es tratado con esta técnica.<br><br>
+          <strong>¿En qué consiste?</strong><br>
+          Lo que distingue a Mohs de la cirugía convencional es la verificación inmediata e intraoperatoria de los márgenes. Mientras el paciente espera, cada capa extirpada es analizada al microscopio en el momento, permitiendo ver el 100% del borde tumoral. Si persisten células cancerosas, se actúa de inmediato y con precisión milimétrica — sin necesidad de una segunda cirugía. Durante el procedimiento se realiza un mapeo espacial del tumor para identificar con exactitud dónde persiste tejido comprometido.<br><br>
+          <strong>Ventajas:</strong><br>
+          El resultado es el mayor ahorro posible de piel sana, la menor tasa de recidiva disponible y el mejor resultado funcional y estético final. Es la mejor alternativa disponible hasta la fecha para carcinomas basocelulares y espinocelulares en cara, orejas, nariz, párpados y otras zonas de alto riesgo.<br><br>
+          <strong>¿Cuándo se indica?</strong><br>
+          No está indicada para todo cáncer de piel. Los consensos internacionales la recomiendan en tumores ubicados en zonas complejas (cara, cuello, cabeza) o cuando el tumor tiene características agresivas o es recurrente.
+          <img class="edu-photo" src="img/edu-mohs.jpg" alt="Procesamiento de muestra en Cirugía de Mohs">
+        </div>
+      </div>
+
+      <div class="faq-item" id="edu-chequeo">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">Chequeo Preventivo de Lunares</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          El examen preventivo anual de lunares es una instancia muy valiosa para detectar lesiones malignas o pre-malignas en etapas muy tempranas. Un lunar maligno detectado a tiempo tiene excelente pronóstico y el tratamiento normalmente es curativo. Un examen de 20 minutos al año puede hacer una gran diferencia.<br><br>
+          <strong>¿Para quién es especialmente recomendable?</strong><br>
+          — Exposición solar excesiva (trabajo, deporte o recreación).<br>
+          — Quemaduras solares, especialmente en la infancia.<br>
+          — Múltiples lunares en el cuerpo.<br>
+          — Familiar cercano con cáncer de piel.<br>
+          — Historia personal de cáncer de piel.<br><br>
+          <strong>¿En qué consiste?</strong><br>
+          Consiste en la observación detallada de toda la piel — de la cabeza a los pies — con un dermatoscopio, que amplifica cada lunar y permite ver detalles que el ojo desnudo no detecta. El dermatólogo identifica el "patrón personal" de lunares del paciente para detectar aquellos diferentes al resto, que pueden ser peligrosos. Además de melanoma, permite identificar carcinomas y lesiones pre-malignas como queratosis actínicas.<br><br>
+          <strong>¿Cómo prepararse?</strong><br>
+          Antes del examen, es útil auto-examinarse frente a un espejo y reconocer lunares que hayan cambiado o dado síntomas (picazón, sangrado, dolor). Más del 50% de los lunares malignos son detectados primero por el propio paciente o un familiar — por eso, la observación cotidiana importa.
+          <img class="edu-photo" src="img/edu-chequeo.jpg" alt="Examen con dermatoscopio">
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -932,15 +1127,24 @@
 <section id="faq">
   <div class="container">
     <p class="section-label reveal">Preguntas frecuentes</p>
-    <h2 class="section-title reveal reveal-delay-1">Lo que más nos <em>preguntan.</em></h2>
+    <h2 class="section-title reveal reveal-delay-1">Lo que nos <em>preguntan.</em></h2>
     <div class="faq-list reveal reveal-delay-2">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
-          <span class="faq-q-text">¿Cómo sé si un lunar es peligroso?</span>
+          <span class="faq-q-text">Soy de regiones y quiero una segunda opinión</span>
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
-          Utilizamos la regla ABCDE: Asimetría, Bordes irregulares, Color no uniforme, Diámetro mayor a 6mm y Evolución. Sin embargo, el ojo clínico entrenado y la dermoscopia digital son indispensables para una evaluación confiable. La autoexploración es útil, pero no reemplaza el control anual profesional.
+          Tenemos la posibilidad de ofrecerte una consulta online de telemedicina. En este caso, lo ideal es que ya tengas una biopsia confirmando tu diagnóstico de cáncer de piel y, de esta forma, poder ayudarte de forma mucho más precisa en tu plan de tratamiento.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">¿Cuándo me preocupo de un lunar?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Cuando tengo un lunar antiguo que cambia, o un lunar nuevo que aumenta de tamaño o que es diferente a los demás en su tamaño, forma o color, debo consultar.<br><br>En la clínica, el lunar es evaluado con dermatoscopía, donde hay mucha más información para determinar si tiene indicación de ser extirpado para estudiar el diagnóstico más preciso, o si simplemente puede ser observado o dejado en seguimiento.
         </div>
       </div>
       <div class="faq-item">
@@ -949,7 +1153,7 @@
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
-          La Cirugía de Mohs es la técnica con la tasa de curación más alta para ciertos cánceres de piel, especialmente en zonas faciales o de riesgo. Se extirpa el tumor en capas, examinando cada una al microscopio, hasta que no queden células cancerosas. El resultado es la máxima preservación del tejido sano.
+          La Cirugía de Mohs es la técnica con la tasa de curación más alta para el carcinoma, especialmente en las zonas faciales, y que permite el mayor ahorro posible de piel sana, mejorando los resultados funcionales y estéticos finales. Se extirpa el tumor en capas, examinando cada una al microscopio hasta ver el 100% de los márgenes con mucha precisión. El resultado es la máxima preservación de tejido sano y la mínima posibilidad de que el tumor vuelva a aparecer.
         </div>
       </div>
       <div class="faq-item">
@@ -958,7 +1162,7 @@
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
-          Para pacientes sin antecedentes, recomendamos un control anual a partir de los 30 años, o antes si hay historia familiar de melanoma, piel clara, o exposición solar intensa. Quienes ya han tenido un cáncer de piel requieren controles más frecuentes, generalmente cada 3 a 6 meses.
+          Para pacientes sin antecedentes, recomendamos comenzar con una evaluación inicial. A partir de esa consulta, determinamos si tiene sentido establecer un plan de controles preventivos y con qué periodicidad — esto se define de forma personalizada para cada caso.<br><br>En pacientes que ya han tenido cáncer de piel, los controles son más frecuentes: generalmente cada 3 a 12 meses, según el nivel de riesgo de cada paciente. En ambos casos, evaluamos la utilidad de incorporar tecnologías de imagen avanzadas — como el seguimiento dermatoscópico digital y la fotografía corporal total asistida por inteligencia artificial — para lograr un seguimiento aún más preciso y oportuno.
         </div>
       </div>
       <div class="faq-item">
@@ -970,15 +1174,6 @@
           Sí. La mayoría de los cánceres de piel detectados en etapas tempranas tienen tasas de curación superiores al 95%. El melanoma, aunque más agresivo, también tiene excelente pronóstico cuando se encuentra en estadio inicial. Por eso la prevención y el control regular son fundamentales.
         </div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          <span class="faq-q-text">¿Cómo puedo agendar una hora de evaluación?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">
-          Puede contactarnos directamente por WhatsApp al +56 9 3954 7142, escribirnos a contacto@drschwartz.cl, o usar el botón de agendamiento en este sitio. Atendemos en DermaKlinic, Av. La Dehesa 222 Of. 620, Las Condes, Santiago.
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -988,12 +1183,8 @@
   <div class="container" style="max-width:700px;margin:0 auto;text-align:center">
     <p class="section-label reveal">Agenda tu evaluación</p>
     <h2 class="cta-title reveal reveal-delay-1">
-      El mejor momento<br>para cuidar tu piel<br>es <em>ahora.</em>
+      El diagnóstico a tiempo<br><em>hace la verdadera diferencia.</em>
     </h2>
-    <p class="cta-sub reveal reveal-delay-2">
-      Solicita tu hora de evaluación con el Dr. Schwartz.
-      Primera consulta disponible en DermaKlinic, Las Condes.
-    </p>
     <div class="cta-actions reveal reveal-delay-3">
       <a href="https://wa.me/56939547142" class="btn-gold" target="_blank">WhatsApp →</a>
       <a href="mailto:contacto@drschwartz.cl" class="btn-outline">Enviar correo</a>
@@ -1017,7 +1208,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-logo">Dr. Rodrigo Schwartz · Dermatología Oncológica</span>
+  <span class="footer-logo">Dr. Rodrigo Schwartz · Dermatología Oncológica / Cirugía de Mohs</span>
   <div class="footer-links">
     <a href="https://instagram.com" target="_blank">Instagram</a>
     <a href="https://linkedin.com" target="_blank">LinkedIn</a>
@@ -1064,6 +1255,19 @@
       if (!isOpen) item.classList.add('open');
     });
   });
+
+  // Auto-open accordion when navigating via hash link
+  function openAccordionFromHash() {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const target = document.querySelector(hash + '.faq-item');
+    if (!target) return;
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    target.classList.add('open');
+    setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
+  window.addEventListener('hashchange', openAccordionFromHash);
+  openAccordionFromHash();
 </script>
 </body>
 </html>

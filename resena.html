@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reseña — Dr. Rodrigo Schwartz · Dermatología Oncológica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" /></noscript>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:       #f0ebe3;
+      --cream-light: #f7f4f0;
+      --cream-dark:  #e6dfd5;
+      --tan:         #b8956a;
+      --tan-light:   #d4b896;
+      --tan-dark:    #7a5c3a;
+      --brown:       #241a11;
+      --brown-mid:   #5c4433;
+      --brown-light: #9a8070;
+      --white:       #faf8f5;
+      --accent:      #b8956a;
+      --font-display: 'DM Sans', system-ui, sans-serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--brown);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--tan-light); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+      transition: background 0.5s, padding 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(250,248,245,0.94);
+      backdrop-filter: blur(12px);
+      padding: 18px 48px;
+      border-bottom: 1px solid rgba(184,149,106,0.15);
+    }
+    .nav-logo {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.4s;
+    }
+    nav.scrolled .nav-logo { color: var(--brown); }
+    .nav-logo span { font-weight: 300; opacity: 0.7; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      font-weight: 400;
+      transition: color 0.3s;
+    }
+    nav.scrolled .nav-links a { color: var(--brown-mid); }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--white);
+      color: var(--brown) !important;
+      padding: 10px 24px;
+      border-radius: 100px;
+      font-weight: 500 !important;
+      transition: background 0.3s, transform 0.2s !important;
+    }
+    nav.scrolled .nav-cta { background: var(--tan); color: var(--white) !important; }
+    .nav-cta:hover { background: var(--tan) !important; color: var(--white) !important; transform: scale(1.02); }
+
+    /* ── PAGE HEADER ── */
+    #page-header {
+      position: relative;
+      height: 60vh;
+      min-height: 420px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      overflow: hidden;
+      padding: 0 0 80px 64px;
+    }
+    .page-header-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(120% 100% at 75% 30%, rgba(70,52,36,0.6) 0%, rgba(30,22,15,0.95) 70%),
+        linear-gradient(to right, #1a130d 0%, #2a1f15 100%);
+    }
+    .page-header-photo {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      width: 45%;
+      object-fit: cover;
+      object-position: center 35%;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .page-header-content {
+      position: relative;
+      max-width: 520px;
+    }
+    .page-header-label {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--tan-light);
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.9s 0.3s forwards;
+    }
+    .page-header-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5.5vw, 72px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 1s 0.5s forwards;
+    }
+    .page-header-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--tan-light);
+    }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 100px 48px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 54px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--brown);
+      letter-spacing: -0.01em;
+    }
+    .section-title em { font-style: italic; font-weight: 400; color: var(--tan); }
+
+    /* ── BIO SECTION ── */
+    #bio { background: var(--white); }
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .bio-text p {
+      margin-top: 28px;
+      font-size: 16px;
+      line-height: 1.85;
+      color: var(--brown-mid);
+    }
+    .bio-text p + p { margin-top: 16px; }
+    .bio-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .bio-image img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: top center;
+      filter: sepia(10%) contrast(1.02);
+      transition: transform 6s ease-out;
+    }
+    .bio-image:hover img { transform: scale(1.03); }
+    .bio-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(184,149,106,0.15) 0%, transparent 50%);
+      z-index: 1;
+    }
+
+    /* ── STATS BAR ── */
+    #stats-resena {
+      background: var(--tan);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+    }
+    .stat-item {
+      flex: 1;
+      max-width: 220px;
+      text-align: center;
+      padding: 16px 32px;
+      border-right: 1px solid rgba(255,255,255,0.2);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 54px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat-num sup { font-size: 24px; }
+    .stat-label {
+      margin-top: 8px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(250,248,245,0.75);
+    }
+
+    /* ── TIMELINE ── */
+    #trayectoria { background: var(--cream); }
+    .timeline {
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 48px;
+      padding: 36px 0;
+      border-top: 1px solid rgba(184,149,106,0.2);
+      align-items: start;
+    }
+    .timeline-item:last-child { border-bottom: 1px solid rgba(184,149,106,0.2); }
+    .timeline-year {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--tan);
+      letter-spacing: 0.08em;
+      padding-top: 2px;
+    }
+    .timeline-body {}
+    .timeline-role {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 6px;
+    }
+    .timeline-place {
+      font-size: 13px;
+      color: var(--tan-dark);
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+    .timeline-desc {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--brown-mid);
+      max-width: 600px;
+    }
+
+    /* ── FORMACIÓN ── */
+    #formacion { background: var(--white); }
+    .formation-grid {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--cream-dark);
+    }
+    .formation-card {
+      background: var(--cream-light);
+      padding: 44px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .formation-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--tan);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s;
+    }
+    .formation-card:hover::before { transform: scaleX(1); }
+    .formation-year {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 12px;
+    }
+    .formation-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .formation-place {
+      font-size: 13px;
+      color: var(--brown-light);
+    }
+
+    /* ── ACADÉMICO ── */
+    #academico { background: var(--cream); }
+    .academic-stats {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      background: var(--tan);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 80px;
+    }
+    .academic-stat-item {
+      padding: 36px 32px;
+      border-right: 1px solid rgba(255,255,255,0.2);
+      text-align: center;
+    }
+    .academic-stat-item:last-child { border-right: none; }
+    .academic-stat-num {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .academic-stat-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(250,248,245,0.75);
+    }
+
+    /* Publications list */
+    .pub-list {
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .pub-item {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 20px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(184,149,106,0.15);
+      align-items: start;
+    }
+    .pub-item:last-child { border-bottom: 1px solid rgba(184,149,106,0.15); }
+    .pub-num {
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: var(--tan);
+      padding-top: 2px;
+      font-weight: 400;
+    }
+    .pub-text {
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--brown-mid);
+    }
+    .pub-text em { font-style: italic; color: var(--brown); }
+
+    /* Book chapters */
+    .chapters-list {
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .chapter-item {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 20px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(184,149,106,0.15);
+      align-items: start;
+    }
+    .chapter-item:last-child { border-bottom: 1px solid rgba(184,149,106,0.15); }
+    .chapter-num {
+      font-family: var(--font-display);
+      font-size: 13px;
+      color: var(--tan);
+      padding-top: 2px;
+    }
+    .chapter-text {
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--brown-mid);
+    }
+    .chapter-text em { font-style: italic; color: var(--brown); }
+
+    /* Congress accordion */
+    .congress-list {
+      margin-top: 0;
+    }
+    .congress-item {
+      border-top: 1px solid rgba(184,149,106,0.15);
+    }
+    .congress-item:last-child { border-bottom: 1px solid rgba(184,149,106,0.15); }
+    .congress-q {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 18px 0;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .congress-date {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--tan);
+      min-width: 80px;
+      padding-top: 2px;
+      flex-shrink: 0;
+    }
+    .congress-title {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--brown);
+      line-height: 1.5;
+      flex: 1;
+      text-align: left;
+    }
+    .congress-icon {
+      font-size: 20px;
+      color: var(--tan-light);
+      line-height: 1;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+    .congress-item.open .congress-icon { transform: rotate(45deg); }
+    .congress-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      padding-left: 100px;
+    }
+    .congress-item.open .congress-a { max-height: 200px; }
+    .congress-a-inner {
+      padding-bottom: 18px;
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--brown-mid);
+    }
+
+    /* Subsection header */
+    .subsection-header {
+      margin-bottom: 32px;
+    }
+    .subsection-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 4px;
+    }
+    .subsection-sub {
+      font-size: 13px;
+      color: var(--brown-light);
+    }
+
+    /* Section collapse */
+    .section-collapse-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+    }
+    .section-collapse-btn:hover .section-title { color: var(--tan); }
+    .section-collapse-icon {
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--tan);
+      line-height: 1;
+      margin-top: 12px;
+      flex-shrink: 0;
+      transition: transform 0.35s;
+    }
+    .section-collapse-btn[aria-expanded="true"] .section-collapse-icon { transform: rotate(45deg); }
+
+    .subsection-toggle {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      border-top: 1px solid rgba(184,149,106,0.2);
+      border-bottom: 1px solid rgba(184,149,106,0.2);
+    }
+    .subsection-toggle .subsection-title { font-size: inherit; margin: 0; }
+    .subsection-toggle .subsection-sub { margin-top: 4px; }
+    .subsection-toggle[aria-expanded="true"] .section-collapse-icon { transform: rotate(45deg); }
+
+    .section-collapse-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .section-collapse-body.open {
+      max-height: 9999px;
+    }
+
+    /* ── CTA ── */
+    #cta-resena {
+      background: var(--brown);
+      text-align: center;
+      padding: 100px 48px;
+    }
+    #cta-resena .section-label { color: var(--tan-light); }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      margin-top: 16px;
+      margin-bottom: 40px;
+    }
+    .cta-title em { font-style: italic; color: var(--tan-light); }
+    .btn-primary {
+      background: var(--tan);
+      color: var(--white);
+      padding: 14px 36px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--tan-dark); transform: scale(1.02); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--cream-dark);
+      border-top: 1px solid rgba(184,149,106,0.2);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-logo {
+      font-family: var(--font-body);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brown-mid);
+    }
+    .footer-copy { font-size: 12px; color: var(--brown-light); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 12px;
+      color: var(--brown-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--tan); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.35s; }
+    .reveal-delay-4 { transition-delay: 0.5s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: none; }
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .whatsapp-fab {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      z-index: 90;
+      background: #25D366;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.3);
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .whatsapp-fab:hover { transform: scale(1.08); box-shadow: 0 6px 32px rgba(37,211,102,0.45); }
+    .whatsapp-fab svg { width: 26px; height: 26px; fill: white; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      #page-header { padding: 0 24px 64px; }
+      .page-header-photo { display: none; }
+      section { padding: 72px 24px; }
+      #stats-resena { padding: 32px 24px; flex-wrap: wrap; gap: 0; }
+      .stat-item { min-width: 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 20px; }
+      .stat-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.08); }
+      .bio-grid { grid-template-columns: 1fr; gap: 40px; }
+      .bio-image img { height: 320px; }
+      .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+      .formation-grid { grid-template-columns: 1fr; }
+      .academic-stats { grid-template-columns: repeat(2, 1fr); }
+      .academic-stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+      .academic-stat-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.2); }
+      .academic-stat-item:last-child { border-bottom: none; }
+      .congress-a { padding-left: 0; }
+      .congress-q { flex-wrap: wrap; gap: 8px; }
+      .congress-date { min-width: auto; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Dr. <span>Rodrigo</span> Schwartz</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">El Doctor</a></li>
+    <li><a href="resena.html">Reseña</a></li>
+    <li><a href="index.html#faq">Preguntas</a></li>
+    <li><a href="https://a3bea3a262553b6628912d796aa36e5c84682cc1.agenda.softwaremedilink.com/agenda?modalidad=1" class="nav-cta" target="_blank">Agendar Hora</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<section id="page-header">
+  <div class="page-header-bg"></div>
+  <img class="page-header-photo" src="img/dr-retrato.jpg" alt="Dr. Rodrigo Schwartz">
+  <div class="page-header-content">
+    <p class="page-header-label">Reseña · Formación y Trayectoria</p>
+    <h1 class="page-header-title">Dr. Rodrigo<br><em>Schwartz</em></h1>
+  </div>
+</section>
+
+<!-- BIO -->
+<section id="bio">
+  <div class="container">
+    <div class="bio-grid">
+      <div class="bio-text reveal">
+        <p class="section-label">El Doctor</p>
+        <h2 class="section-title">Dermatólogo<br>y <em>Cirujano de Mohs</em></h2>
+        <p>
+          Soy Dermatólogo especializado en Dermato-Oncología y Cirugía Micrográfica de Mohs, con más de 20 años de experiencia en el diagnóstico y tratamiento del cáncer de piel.
+        </p>
+        <p>
+          Mi formación académica se extendió a lo largo de tres países — Chile, Canadá y Australia — donde perfeccioné mi práctica clínica en los centros más avanzados del mundo en el manejo del cáncer de piel.
+        </p>
+        <p>
+          Actualmente me desempeño como Dermato-Oncólogo y Director Médico en DermaKlinic, y soy Dermato-Oncólogo del Instituto Nacional del Cáncer, además de Profesor Asistente en el Departamento de Dermatología de la Universidad de Chile.
+        </p>
+        <p>
+          Mi enfoque integra la más alta precisión técnica con una atención humana y personalizada, buscando siempre el bienestar integral de cada paciente.
+        </p>
+      </div>
+      <div class="bio-image reveal reveal-delay-2">
+        <img src="img/dr-consulta.jpg" alt="Dr. Rodrigo Schwartz">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="stats-resena">
+  <div class="stat-item reveal">
+    <div class="stat-num">20<sup>+</sup></div>
+    <div class="stat-label">Años de experiencia</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-1">
+    <div class="stat-num">22</div>
+    <div class="stat-label">Publicaciones científicas</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-2">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Países de formación</div>
+  </div>
+</div>
+
+<!-- TRAYECTORIA -->
+<section id="trayectoria">
+  <div class="container">
+    <button class="section-collapse-btn" aria-expanded="false">
+      <div>
+        <p class="section-label">Trayectoria Profesional</p>
+        <h2 class="section-title">Experiencia<br><em>clínica</em></h2>
+      </div>
+      <span class="section-collapse-icon">+</span>
+    </button>
+    <div class="section-collapse-body">
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2024 — Presente</div>
+        <div class="timeline-body">
+          <div class="timeline-role">Dermato-Oncólogo y Director Médico</div>
+          <div class="timeline-place">DermaKlinic · Santiago, Chile</div>
+          <div class="timeline-desc">Dirección clínica y atención especializada en cáncer de piel, melanoma y Cirugía de Mohs en clínica privada de alta complejidad.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2022 — 2024</div>
+        <div class="timeline-body">
+          <div class="timeline-role">Dermato-Oncólogo</div>
+          <div class="timeline-place">Medicop · Santiago, Chile</div>
+          <div class="timeline-desc">Atención especializada en Dermato-Oncología, diagnóstico y tratamiento del cáncer de piel.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2015 — 2026</div>
+        <div class="timeline-body">
+          <div class="timeline-role">Dermato-Oncólogo</div>
+          <div class="timeline-place">Instituto Nacional del Cáncer · Santiago, Chile</div>
+          <div class="timeline-desc">Diagnóstico y tratamiento quirúrgico del cáncer de piel en el principal centro oncológico público del país, con enfoque en casos de alta complejidad.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2012 — 2026</div>
+        <div class="timeline-body">
+          <div class="timeline-role">Profesor Asistente</div>
+          <div class="timeline-place">Departamento de Dermatología, Universidad de Chile</div>
+          <div class="timeline-desc">Docencia de pregrado y postgrado en dermatología, con énfasis en dermatoscopía y Cirugía de Mohs. Docencia directa a médicos en formación en el Instituto Nacional del Cáncer.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2007 — 2022</div>
+        <div class="timeline-body">
+          <div class="timeline-role">Dermatólogo de Staff · Jefe de Departamento</div>
+          <div class="timeline-place">Clínica Las Condes · Santiago, Chile</div>
+          <div class="timeline-desc">15 años de práctica clínica en el principal centro privado del país. Nombrado Jefe del Departamento de Dermatología en 2022.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2007 — 2014</div>
+        <div class="timeline-body">
+          <div class="timeline-role">Dermatólogo</div>
+          <div class="timeline-place">Hospital Clínico Universidad de Chile · Santiago, Chile</div>
+          <div class="timeline-desc">Práctica clínica en el principal centro universitario de salud pública del país.</div>
+        </div>
+      </div>
+    </div>
+    </div><!-- /.section-collapse-body -->
+  </div>
+</section>
+
+<!-- FORMACIÓN -->
+<section id="formacion">
+  <div class="container">
+    <button class="section-collapse-btn" aria-expanded="false">
+      <div>
+        <p class="section-label">Formación Académica</p>
+        <h2 class="section-title">Entrenamiento<br><em>internacional</em></h2>
+      </div>
+      <span class="section-collapse-icon">+</span>
+    </button>
+    <div class="section-collapse-body">
+    <div class="formation-grid">
+      <div class="formation-card reveal">
+        <div class="formation-year">2021 – 2022</div>
+        <div class="formation-title">Clinical Fellowship en Microscopía Confocal y Melanoma</div>
+        <div class="formation-place">Melanoma Institute Australia · Sídney, Australia</div>
+      </div>
+      <div class="formation-card reveal reveal-delay-1">
+        <div class="formation-year">2011 – 2012</div>
+        <div class="formation-title">Clinical Fellowship en Cirugía Micrográfica de Mohs y Dermato-Oncología</div>
+        <div class="formation-place">University of Toronto · Toronto, Canadá</div>
+      </div>
+      <div class="formation-card reveal reveal-delay-2">
+        <div class="formation-year">2008</div>
+        <div class="formation-title">Entrenamiento en Dermatoscopía y Microscopía Confocal</div>
+        <div class="formation-place">Skin Cancer Associates · Florida, EE.UU.</div>
+      </div>
+      <div class="formation-card reveal reveal-delay-3">
+        <div class="formation-year">2003 – 2006</div>
+        <div class="formation-title">Especialidad en Dermatología</div>
+        <div class="formation-place">Universidad de Chile · Santiago, Chile</div>
+      </div>
+      <div class="formation-card reveal">
+        <div class="formation-year">2002</div>
+        <div class="formation-title">Título de Médico Cirujano</div>
+        <div class="formation-place">Universidad de Chile · Santiago, Chile</div>
+      </div>
+    </div>
+    </div><!-- /.section-collapse-body -->
+  </div>
+</section>
+
+<!-- ACADÉMICO -->
+<section id="academico">
+  <div class="container">
+    <p class="section-label reveal">Actividad Académica</p>
+    <h2 class="section-title reveal reveal-delay-1">Ciencia y<br><em>docencia</em></h2>
+
+    <div class="academic-stats reveal reveal-delay-2">
+      <div class="academic-stat-item">
+        <div class="academic-stat-num">22</div>
+        <div class="academic-stat-label">Publicaciones</div>
+      </div>
+      <div class="academic-stat-item">
+        <div class="academic-stat-num">4</div>
+        <div class="academic-stat-label">Capítulos de libros</div>
+      </div>
+      <div class="academic-stat-item">
+        <div class="academic-stat-num">25<sup style="font-size:22px">+</sup></div>
+        <div class="academic-stat-label">Congresos internacionales</div>
+      </div>
+      <div class="academic-stat-item">
+        <div class="academic-stat-num">20<sup style="font-size:22px">+</sup></div>
+        <div class="academic-stat-label">Congresos nacionales</div>
+      </div>
+    </div>
+
+    <!-- PUBLICACIONES -->
+    <button class="subsection-toggle" aria-expanded="false">
+      <div>
+        <div class="subsection-title">Publicaciones Científicas</div>
+        <div class="subsection-sub">Artículos en revistas internacionales indexadas</div>
+      </div>
+      <span class="section-collapse-icon">+</span>
+    </button>
+    <div class="section-collapse-body">
+    <div class="pub-list">
+      <div class="pub-item">
+        <div class="pub-num">1</div>
+        <div class="pub-text"><em>Schwartz RJ</em>, et al. Reflectance confocal microscopy terminology for nonmelanocytic skin lesions: A Delphi consensus of experts. <em>J Am Acad Dermatol.</em> 2025;93(3):663-670.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">2</div>
+        <div class="pub-text">Ho G, Gill M, Grant-Kels J, <em>Schwartz RJ</em>, et al. International expert recommendations on image acquisition for in vivo reflectance confocal microscopy of cutaneous tumors. <em>J Am Acad Dermatol.</em> 2024 Mar;90(3):537-544.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">3</div>
+        <div class="pub-text">Ho G, <em>Schwartz RJ</em>, et al. Utility of optical coherence tomography in basal cell naevus syndrome: A case report. <em>Australas J Dermatol.</em> 2022 Sep 20.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">4</div>
+        <div class="pub-text"><em>Schwartz RJ</em>, Ho G, Gouveia BM, Martin LK, Guitera P. An adapter window for precise skin marking during handheld reflectance confocal microscopy scanning. <em>J Am Acad Dermatol.</em> 2022 Jan 24.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">5</div>
+        <div class="pub-text"><em>Schwartz RJ</em>, Ho G, Smith A, et al. Successful treatment of eruptive keratoacanthomas with acitretin for patients on checkpoint inhibitor immunotherapy. <em>J Eur Acad Dermatol Venereol.</em> 2022 Jan 18.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">6</div>
+        <div class="pub-text">Navarrete-Dechent C, <em>Schwartz R</em>, González S, et al. Reflectance confocal microscopy in the evaluation of targetoid haemosiderotic haemangioma. <em>Australas J Dermatol.</em> 2018 May;59(2):135-137.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">7</div>
+        <div class="pub-text">Tran JM, <em>Schwartz R</em>, Fung K, Rochon P, Chan AW. Comprehensive capture of cutaneous melanoma by the Ontario Cancer Registry. <em>Cancer Causes Control.</em> 2016 Jan;27(1):137-42.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">8</div>
+        <div class="pub-text"><em>Schwartz RJ</em>, Vera K, Navarrete N, Lobos P. In vivo reflectance confocal microscopy of halo nevus. <em>J Cutan Med Surg.</em> 2013 Jan-Feb;17(1):33-8.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">9</div>
+        <div class="pub-text"><em>Schwartz R</em>. Sensitivity and specificity of reflectance confocal microscopy on skin tumours. <em>Rev Chil Dermatol;</em> 28(2), 2012.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">10</div>
+        <div class="pub-text"><em>Schwartz R</em>, Vera K, Ruedi P. Ramsay-Hunt Syndrome. <em>Rev Chil Dermatol;</em> 25(4), 2009.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">11</div>
+        <div class="pub-text"><em>Schwartz R</em> et al. Preventive strategies in melanoma. <em>Rev Med Clin Condes.</em> 2011;22(4):466-475.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">12</div>
+        <div class="pub-text"><em>Schwartz R</em>, Lobos C, Ibarra A. Dermatoscopy of acral melanoma. <em>Rev Chil Dermatol;</em> 25(1):68-75, 2009.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">13</div>
+        <div class="pub-text"><em>Schwartz R</em>, Sepulveda JE, Quintana T. Psychobiological factors in childhood vitiligo. <em>Rev Med Chile;</em> 137:53-62, 2009.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">14</div>
+        <div class="pub-text"><em>Schwartz R</em>, Avello E, Palisson F. Lamotrigine-induced toxic epidermal necrolysis treated with intravenous immunoglobulin and amniotic membranes. <em>Arch Dermatol.</em> 2008 Jun;144(6):724-6.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">15</div>
+        <div class="pub-text"><em>Schwartz R</em>, Rehder K, Parsons DJ, Morrell DS. Intense pruritus and failure to thrive in Alagille syndrome. <em>J Am Acad Dermatol.</em> 2008 Feb;58(2 Suppl):S9-11.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">16</div>
+        <div class="pub-text"><em>Schwartz R</em>. Practical utility of dermoscopy on melanoma. <em>Rev Chil Dermatol;</em> 23(2):94-96, 2007.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">17</div>
+        <div class="pub-text"><em>Schwartz R</em>, Muñoz C, Fantobal A, Zemelman V. Clinico-pathological correlation among benign cutaneous tumours. <em>Rev Chil Dermatol;</em> 22(3):160-165, 2006.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">18</div>
+        <div class="pub-text"><em>Schwartz R</em>, Figueroa A. Atrofia maculosa varioliformis cutis. <em>Rev Chil Dermatol;</em> 22(3):194, 2006.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">19</div>
+        <div class="pub-text">Navarrete N, <em>Schwartz R</em>. Scar Sarcoidosis. <em>Rev Chil Dermatol;</em> 20(2):129, 2004.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">20</div>
+        <div class="pub-text"><em>Schwartz R</em>, Zegpi E. Facomatosis pigmentovascularis: apropos of one case. <em>Rev Chil Dermatol;</em> 20(4):260-263, 2004.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">21</div>
+        <div class="pub-text"><em>Schwartz R</em>, Sepulveda JE, Quintana T. Possible role of psychological and environmental factors in the genesis of childhood vitiligo. <em>Revista Medica de Chile.</em> 2009 Jan;137(1):53-62.</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-num">22</div>
+        <div class="pub-text">Sepulveda JE, <em>Schwartz R</em>, Quintana T. Vitiligo and temperament. <em>Rev Psiquiatr Cl;</em> 45(1/2):72-82, 2008.</div>
+      </div>
+    </div>
+    </div><!-- /.section-collapse-body pub-list -->
+
+    <!-- CAPÍTULOS DE LIBROS -->
+    <button class="subsection-toggle" aria-expanded="false" style="margin-top: 72px;">
+      <div>
+        <div class="subsection-title">Capítulos de Libros</div>
+        <div class="subsection-sub">Contribuciones a textos académicos internacionales</div>
+      </div>
+      <span class="section-collapse-icon">+</span>
+    </button>
+    <div class="section-collapse-body">
+    <div class="chapters-list">
+      <div class="chapter-item">
+        <div class="chapter-num">1</div>
+        <div class="chapter-text">Sadek A., Oliveira A., Salerni G., Marín M.B., <em>Schwartz R.</em>, Cabo H. (2020) Nodular non-pigmented Lesions on the face. In: Cabo H., Lallas A. (eds) <em>Atlas of Dermatoscopy Cases.</em> Springer, Cham.</div>
+      </div>
+      <div class="chapter-item">
+        <div class="chapter-num">2</div>
+        <div class="chapter-text">Togawa Y., <em>Schwartz R.</em>, Lallas A. (2020) Nail Lesions. In: Cabo H., Lallas A. (eds) <em>Atlas of Dermatoscopy Cases.</em> Springer, Cham.</div>
+      </div>
+      <div class="chapter-item">
+        <div class="chapter-num">3</div>
+        <div class="chapter-text"><em>Schwartz R.</em> (2019) Clinical Case 82. In: Cabo H. (eds) <em>Dermatoscopy Clinical Cases.</em> Ed. Journal.</div>
+      </div>
+      <div class="chapter-item">
+        <div class="chapter-num">4</div>
+        <div class="chapter-text"><em>Schwartz R.</em> (2013) Tumoral Lesions. In: Saieh A., Pinto V. (eds) <em>Manual of Ambulatory Pediatrics.</em> Ed. Mediterraneo.</div>
+      </div>
+    </div>
+    </div><!-- /.section-collapse-body chapters-list -->
+
+    <!-- CONGRESOS INTERNACIONALES -->
+    <button class="subsection-toggle" aria-expanded="false" style="margin-top: 72px;">
+      <div>
+        <div class="subsection-title">Congresos Internacionales</div>
+        <div class="subsection-sub">Exposiciones, coordinaciones y ponencias en eventos internacionales</div>
+      </div>
+      <span class="section-collapse-icon">+</span>
+    </button>
+    <div class="section-collapse-body">
+    <div class="congress-list">
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">2026</span>
+          <span class="congress-title">XLIII Congreso RADLA — Buenos Aires, Argentina</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Expositor: "IA: entre la utopía y la distopía". Simposio de Inteligencia Artificial y Nuevas Tecnologías.</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">May 2024</span>
+          <span class="congress-title">XXXVII Annual Meeting of Latin-American Dermatologists (RADLA) — Lima, Perú</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Presentación oral: "Inteligencia Artificial en Dermatología".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Sep 2023</span>
+          <span class="congress-title">42nd Annual Meeting, International Society of Dermatologic Surgery — Río de Janeiro, Brasil</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Expositor: "East to West flap".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">May 2023</span>
+          <span class="congress-title">40va Reunión Anual de Dermatólogos Latinoamericanos (RADLA) — Curitiba, Brasil</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Coordinador de curso y expositor: "Nevus atípico" e "Inteligencia Artificial en dermatología".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Oct 2021</span>
+          <span class="congress-title">Australasian Melanoma Conference 2021 — Workshop de Microscopía Confocal</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Presentación: "Confocal microscopy in amelanotic melanoma and non-melanoma skin cancer" (evento virtual).</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Abr 2021</span>
+          <span class="congress-title">XXXVIII Annual Meeting of Latin-American Dermatologists (RADLA) — Asunción, Paraguay</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Coordinador de curso e Internacional speaker: "Basal Cell carcinoma: dermoscopy clues".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Sep 2019</span>
+          <span class="congress-title">IV Congreso Latinoamericano de Dermatoscopía (CLAD) — Ciudad de México</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">International speaker y coordinador. Presentaciones: "Malignancy clues in dermoscopy", "Regression in dermoscopy", "Dermoscopic approach to nevi", "Dermoscopy of subungueal lesions" y "Challenging cases in dermoscopy".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">May 2019</span>
+          <span class="congress-title">XXXVII Annual Meeting of Latin-American Dermatologists (RADLA) — Buenos Aires, Argentina</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Coordinador de curso y presentación oral: "My patient has Melanoma, what do I do next?" y estudio original: "Correlation between confocal microscopy and histopathology in basal cell carcinoma and melanoma".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">May 2018</span>
+          <span class="congress-title">XXXVII Annual Meeting of Latin-American Dermatologists (RADLA) — Cancún, México</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">International speaker: "Key points in the confocal microscopy of melanoma".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Sep 2017</span>
+          <span class="congress-title">III Congreso Latinoamericano de Dermatoscopía — Buenos Aires, Argentina</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Coordinador de curso: "Dermatoscopy in the XXI century".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Jun 2016</span>
+          <span class="congress-title">XXXIV Annual Meeting of Latin-American Dermatologists — São Paulo, Brasil</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Coordinador e international speaker: "Treatment of pre-malignant lesions", "Confocal Microscopy guided melanoma biopsy" y "Dermoscopy of pink lesions".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Nov 2015</span>
+          <span class="congress-title">XI Biennial Meeting, Mexican Academy of Dermatology — Querétaro, México</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">International speaker: "Dermoscopy of squamous cell carcinoma", "Dermoscopy of thin Melanomas", "Dermoscopy of basal cell carcinoma: a comprehensive view" y "Mohs v/s Conventional surgery in facial skin".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">May 2015</span>
+          <span class="congress-title">XXXIII Annual Meeting of Latin-American Dermatologists — Lima, Perú</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Speaker: "Thin melanomas: the essentials of the enemy" y "Complex dermoscopy cases: Basal Cell Carcinoma and Squamous cell carcinoma".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Nov 2014</span>
+          <span class="congress-title">XX Congreso Ibero-latinoamericano de Dermatología (CILAD) — Río de Janeiro, Brasil</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Coordinador del curso de Melanoma: "Adjuvant treatments in Melanoma: myth or reality?"</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">May 2014</span>
+          <span class="congress-title">XXXII Annual Meeting of Latin-American Dermatologists (RADLA) — Santiago, Chile</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Miembro del comité científico, secretario del curso e international speaker en panel de expertos: "Melanoma: Diagnostic challenges to the experts".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Abr 2013</span>
+          <span class="congress-title">XXXI Annual Meeting of Latin-American Dermatologists (RADLA) — Punta del Este, Uruguay</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">International speaker: "Confocal Microscopy and Melanoma".</div></div>
+      </div>
+    </div>
+    </div><!-- /.section-collapse-body congresos-int -->
+
+    <!-- CONGRESOS NACIONALES -->
+    <button class="subsection-toggle" aria-expanded="false" style="margin-top: 72px;">
+      <div>
+        <div class="subsection-title">Congresos Nacionales</div>
+        <div class="subsection-sub">Exposiciones y ponencias en eventos de Chile</div>
+      </div>
+      <span class="section-collapse-icon">+</span>
+    </button>
+    <div class="section-collapse-body">
+    <div class="congress-list">
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Abr 2024</span>
+          <span class="congress-title">XV Congreso Chileno de Dermatología y Venereología — Viña del Mar</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Conferencista: "Mitos en Dermato-Oncología" y "Colgajo en East to West".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Ago 2022</span>
+          <span class="congress-title">XXXV Curso Internacional de Terapéutica Dermatológica — Santiago</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Conferencista: "Manejo tópico del léntigo maligno".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Nov 2020</span>
+          <span class="congress-title">XIV Congreso Chileno de Dermatología — Santiago</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Sociedad Chilena de Dermatología y Venereología.</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Ago 2019</span>
+          <span class="congress-title">XVI Congreso Chileno de Cirugía Plástica / II Congreso Interdisciplinario de Cirugía Plástica — Santiago</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Conferencista en ambos congresos: "Cirugía de Mohs".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Dic 2018</span>
+          <span class="congress-title">XIII Congreso Chileno de Dermatología y Venereología — Santiago</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Speaker: "Dermatoscopía: Casos y claves para el diagnóstico" y "Algoritmo terapéutico en Queratosis Actínicas".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Nov 2018</span>
+          <span class="congress-title">91º Congreso Chileno e Internacional de Cirugía — Puerto Varas</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Conferencista: "Manejo integral del paciente con cáncer de piel facial. ¿Hacia dónde vamos?"</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Sep 2017</span>
+          <span class="congress-title">XV Congreso Chileno de Cirugía Plástica / V Simposio Internacional de Dermatología — Santiago</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Conferencista: "Cirugía de Mohs" y participación en el V Simposio Internacional de Dermatología de Clínica Las Condes.</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Nov 2016</span>
+          <span class="congress-title">XXV Congreso Chileno de Oftalmología — Viña del Mar</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Conferencista: "Cirugía micrográfica de Mohs".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Oct 2015</span>
+          <span class="congress-title">Primer Curso de Cirugía Dermatológica — Santiago</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Sociedad Chilena de Dermatología.</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Oct 2013</span>
+          <span class="congress-title">I Simposio Latinoamericano de Cirugía de Mohs — Santiago</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Conferencista: "Tips in Mohs surgery Lab".</div></div>
+      </div>
+      <div class="congress-item">
+        <button class="congress-q" aria-expanded="false">
+          <span class="congress-date">Sep 2010</span>
+          <span class="congress-title">X Congreso Chileno de Dermatología — Santiago</span>
+          <span class="congress-icon">+</span>
+        </button>
+        <div class="congress-a"><div class="congress-a-inner">Sociedad Chilena de Dermatología y Venereología.</div></div>
+      </div>
+    </div>
+    </div><!-- /.section-collapse-body congresos-nac -->
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta-resena">
+  <div class="container">
+    <p class="section-label reveal">Agenda tu Hora</p>
+    <h2 class="cta-title reveal reveal-delay-1">¿Tienes dudas sobre<br>tu <em>salud de la piel</em>?</h2>
+    <a href="https://a3bea3a262553b6628912d796aa36e5c84682cc1.agenda.softwaremedilink.com/agenda?modalidad=1" class="btn-primary reveal reveal-delay-2" target="_blank">Agendar Evaluación</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Dr. Rodrigo Schwartz · Dermatología Oncológica / Cirugía de Mohs</span>
+  <div class="footer-links">
+    <a href="https://instagram.com/dr.rodrigoschwartz" target="_blank">Instagram</a>
+    <a href="https://www.linkedin.com/in/rodrigo-schwartz-869b4a51/" target="_blank">LinkedIn</a>
+    <a href="https://mohs.cl" target="_blank">mohs.cl</a>
+  </div>
+  <span class="footer-copy">© 2025 Dr. Rodrigo Schwartz</span>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.me/56939547142" class="whatsapp-fab" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+  // Start scrolled since there's no full-height hero overlay
+  if (window.scrollY === 0) {
+    setTimeout(() => nav.classList.add('scrolled'), 800);
+  } else {
+    nav.classList.add('scrolled');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+
+  // Congress accordion
+  document.querySelectorAll('.congress-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.congress-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.congress-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Section & subsection collapse toggles
+  document.querySelectorAll('.section-collapse-btn, .subsection-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      const body = btn.nextElementSibling;
+      body.classList.toggle('open', !expanded);
+    });
+  });
+</script>
+</body>
+</html>
