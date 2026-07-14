@@ -214,6 +214,24 @@
       letter-spacing: 0.02em;
       transition: border-color 0.3s, background 0.3s, transform 0.2s;
     }
+    .btn-biopsia {
+      background: var(--white);
+      color: var(--brown);
+      padding: 16px 40px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      animation: biopsiaGlow 2.4s ease-out infinite;
+      transition: transform 0.2s, background 0.3s;
+    }
+    .btn-biopsia:hover { transform: scale(1.04); background: var(--cream-light); }
+    @keyframes biopsiaGlow {
+      0% { box-shadow: 0 0 0 0 rgba(212,184,150,0.55); }
+      70% { box-shadow: 0 0 0 14px rgba(212,184,150,0); }
+      100% { box-shadow: 0 0 0 0 rgba(212,184,150,0); }
+    }
     .btn-outline:hover {
       border-color: var(--white);
       background: rgba(250,248,245,0.12);
@@ -864,7 +882,7 @@
     </p>
     <div class="hero-actions">
       <a href="https://a3bea3a262553b6628912d796aa36e5c84682cc1.agenda.softwaremedilink.com/agenda?modalidad=1" class="btn-primary" target="_blank">Agendar Evaluación</a>
-      <a href="#biopsia" class="btn-outline">Ya tengo una biopsia y quiero una opinión</a>
+      <a href="#biopsia" class="btn-biopsia">Ya tengo una biopsia y quiero una opinión</a>
     </div>
   </div>
 </section>
