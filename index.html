@@ -182,6 +182,8 @@
     .hero-actions {
       margin-top: 44px;
       display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       gap: 16px;
       justify-content: flex-start;
       flex-wrap: wrap;
@@ -825,7 +827,7 @@
       .hero-label { font-size: 14px; }
       .hero-content { max-width: 100%; padding: 0 28px; text-align: center; }
       .hero-sub { margin-left: auto; margin-right: auto; max-width: 100%; }
-      .hero-actions { justify-content: center; }
+      .hero-actions { justify-content: center; align-items: center; }
       .hero-bg {
         background:
           linear-gradient(to bottom, rgba(20,15,10,0.1) 0%, rgba(20,15,10,0.25) 40%, rgba(20,15,10,0.85) 100%),
@@ -862,6 +864,7 @@
     </p>
     <div class="hero-actions">
       <a href="https://a3bea3a262553b6628912d796aa36e5c84682cc1.agenda.softwaremedilink.com/agenda?modalidad=1" class="btn-primary" target="_blank">Agendar Evaluación</a>
+      <a href="#biopsia" class="btn-outline">Ya tengo una biopsia y quiero una opinión</a>
     </div>
   </div>
 </section>
