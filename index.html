@@ -641,6 +641,19 @@
     .edu-photo { width: 100%; max-width: 560px; height: 320px; border-radius: 12px; margin-top: 24px; display: block; object-fit: cover; object-position: center; }
     @media (max-width: 600px) { .edu-photo { max-width: 100%; height: 220px; } }
 
+    /* ── BIOPSIA EMBED ── */
+    .biopsia-frame {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--cream-dark);
+      background: var(--white);
+      box-shadow: 0 10px 40px rgba(36,26,17,0.06);
+    }
+    .biopsia-frame iframe { display: block; width: 100%; height: 680px; border: none; }
+    @media (max-width: 640px) {
+      .biopsia-frame iframe { height: 720px; }
+    }
+
     /* ── CTA SECTION ── */
     #cta .section-label { color: var(--tan-light); }
     #cta {
@@ -829,6 +842,7 @@
   <ul class="nav-links">
     <li><a href="#about">El Doctor</a></li>
     <li><a href="resena.html">Reseña</a></li>
+    <li><a href="#biopsia">Mi Biopsia</a></li>
     <li><a href="#faq">Preguntas</a></li>
     <li><a href="https://a3bea3a262553b6628912d796aa36e5c84682cc1.agenda.softwaremedilink.com/agenda?modalidad=1" class="nav-cta" target="_blank">Agendar Hora</a></li>
   </ul>
@@ -1174,6 +1188,21 @@
           Sí. La mayoría de los cánceres de piel detectados en etapas tempranas tienen tasas de curación superiores al 95%. El melanoma, aunque más agresivo, también tiene excelente pronóstico cuando se encuentra en estadio inicial. Por eso la prevención y el control regular son fundamentales.
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIENTACIÓN DE BIOPSIA -->
+<section id="biopsia">
+  <div class="container" style="max-width:760px">
+    <p class="section-label reveal">Orientación de biopsia</p>
+    <h2 class="section-title reveal reveal-delay-1" style="margin-bottom:40px">Tu biopsia,<br><em>en buenas manos.</em></h2>
+    <div class="biopsia-frame reveal reveal-delay-2">
+      <iframe
+        src="https://consejeria-drsch.vercel.app/?embed=true"
+        title="Orientación de Biopsia — Dr. Rodrigo Schwartz"
+        loading="lazy"
+      ></iframe>
     </div>
   </div>
 </section>
