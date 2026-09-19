@@ -237,6 +237,71 @@
       background: rgba(250,248,245,0.12);
       transform: scale(1.02);
     }
+    /* Reseñas del servicio de consejería (biopsia) — mismo widget que biopsia.drschwartz.cl */
+    .reviews-badge {
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      row-gap: 6px;
+      gap: 10px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-family: inherit;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s 1.15s forwards;
+    }
+    .star-row { display: flex; gap: 2px; }
+    .star-row svg { width: 15px; height: 15px; }
+    .star-row svg.star-filled { fill: var(--tan-light); }
+    .star-row svg.star-empty { fill: rgba(250,248,245,0.25); }
+    .reviews-badge-text { font-size: 13px; color: rgba(250,248,245,0.72); }
+    .reviews-badge-text strong { color: var(--tan-light); }
+    .reviews-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--tan-light);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      white-space: nowrap;
+    }
+    .reviews-badge:hover .reviews-toggle { color: var(--white); }
+    .reviews-chevron { transition: transform 0.2s ease; width: 14px; height: 14px; }
+    .reviews-chevron.is-open { transform: rotate(180deg); }
+    .reviews-panel {
+      margin-top: 4px;
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 460px;
+    }
+    .reviews-panel.is-open { display: flex; }
+    .reviews-item {
+      padding: 14px 16px;
+      background: rgba(250,248,245,0.05);
+      border: 1px solid rgba(250,248,245,0.1);
+      border-radius: 10px;
+    }
+    .reviews-item .star-row { margin-bottom: 8px; }
+    .reviews-item p {
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(250,248,245,0.75);
+      line-height: 1.6;
+      margin: 0 0 8px;
+    }
+    .reviews-item span {
+      font-size: 12px;
+      color: rgba(250,248,245,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
     .hero-scroll {
       position: absolute;
       bottom: 40px;
@@ -884,6 +949,19 @@
       <a href="https://a3bea3a262553b6628912d796aa36e5c84682cc1.agenda.softwaremedilink.com/agenda?modalidad=1" class="btn-primary" target="_blank">Agendar Evaluación</a>
       <a href="#biopsia" class="btn-biopsia">Ya tengo una biopsia y quiero una opinión</a>
     </div>
+
+    <!-- Reseñas del servicio de consejería. Se llenan en vivo desde Supabase (ver script al final); permanece oculto si todavía no hay reseñas aprobadas. -->
+    <div id="reviewsWidget" style="display:none;">
+      <button type="button" class="reviews-badge" id="reviewsToggle" aria-expanded="false">
+        <span class="star-row" id="reviewsBadgeStars"></span>
+        <span class="reviews-badge-text"><strong id="reviewsAverage"></strong> · calificación del servicio de consejería</span>
+        <span class="reviews-toggle">
+          Ver comentarios
+          <svg class="reviews-chevron" id="reviewsChevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </span>
+      </button>
+      <div class="reviews-panel" id="reviewsPanel"></div>
+    </div>
   </div>
 </section>
 
@@ -1317,6 +1395,56 @@
   }
   window.addEventListener('hashchange', openAccordionFromHash);
   openAccordionFromHash();
+
+  // Reseñas del servicio de consejería: trae las aprobadas desde Supabase
+  // (misma tabla `reviews` que usa biopsia.drschwartz.cl) y arma el widget.
+  // Si todavía no hay ninguna aprobada, el widget queda oculto.
+  const STAR_PATH = 'M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z';
+  const SUPABASE_URL = 'https://grezsadzqrzslkggjgbx.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdyZXpzYWR6cXJ6c2xrZ2dqZ2J4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQwMzY5NjMsImV4cCI6MjA5OTYxMjk2M30.tpqy5xtaQHEztc4EU15LrJJ07jKJTWiNG_fo4y4a8KE';
+
+  function starRowHtml(rating) {
+    let html = '';
+    for (let i = 1; i <= 5; i++) {
+      html += `<svg viewBox="0 0 24 24" class="${i <= rating ? 'star-filled' : 'star-empty'}"><path d="${STAR_PATH}"/></svg>`;
+    }
+    return html;
+  }
+
+  fetch(`${SUPABASE_URL}/rest/v1/reviews?select=rating,comment,patient_name&approved=eq.true&order=created_at.desc`, {
+    headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
+  })
+    .then(res => res.ok ? res.json() : [])
+    .then(reviews => {
+      if (!reviews || reviews.length === 0) return;
+
+      const average = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+      document.getElementById('reviewsAverage').textContent = average.toFixed(1);
+      document.getElementById('reviewsBadgeStars').innerHTML = starRowHtml(Math.round(average));
+
+      const panel = document.getElementById('reviewsPanel');
+      panel.innerHTML = reviews.map(r => `
+        <div class="reviews-item">
+          <span class="star-row">${starRowHtml(r.rating)}</span>
+          ${r.comment ? `<p>"${r.comment.replace(/</g, '&lt;')}"</p>` : ''}
+          <span>${(r.patient_name || 'Paciente').replace(/</g, '&lt;')}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('reviewsWidget').style.display = '';
+    })
+    .catch(err => console.error('No se pudieron cargar las reseñas:', err));
+
+  const reviewsToggle = document.getElementById('reviewsToggle');
+  const reviewsPanel = document.getElementById('reviewsPanel');
+  const reviewsChevron = document.getElementById('reviewsChevron');
+  if (reviewsToggle) {
+    reviewsToggle.addEventListener('click', () => {
+      const isOpen = reviewsPanel.classList.toggle('is-open');
+      reviewsChevron.classList.toggle('is-open', isOpen);
+      reviewsToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
 </script>
 </body>
 </html>
